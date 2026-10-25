@@ -34,6 +34,10 @@
   .btn.ghost{border-color:var(--stroke);color:var(--text);background:var(--card)}
   .shot{width:260px;max-width:64vw;border-radius:28px;border:1px solid var(--stroke);
         box-shadow:0 18px 40px rgba(0,0,0,.14)}
+  .promo{margin:26px 0 8px}
+  .promo img{display:block;width:100%;height:auto;border-radius:24px;border:1px solid var(--stroke);
+             box-shadow:0 18px 40px rgba(0,0,0,.10)}
+  .promo figcaption{margin-top:10px;font-size:13px;color:var(--muted);text-align:center}
   h2{font-size:21px;margin:44px 0 14px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
   .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);padding:18px}
@@ -84,6 +88,15 @@
     </div>
     <img class="shot" src="variant-a-control.png" alt="Главный экран приложения">
   </header>
+
+  <figure class="promo">
+    <img src="promo.webp"
+         srcset="promo-800.webp 800w, promo.webp 1400w"
+         sizes="(max-width: 760px) 100vw, 720px"
+         width="1400" height="933" loading="lazy" decoding="async"
+         alt="Незнакомые звонки разбиваются о щит фильтра, а звонок из контактов проходит">
+    <figcaption>Реклама и мошенники разбиваются о фильтр — звонки из контактов проходят</figcaption>
+  </figure>
 
   <h2>Что делает</h2>
   <div class="grid">

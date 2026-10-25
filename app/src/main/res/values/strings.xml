@@ -195,7 +195,7 @@
     <!-- Distribution -->
     <string name="update_repo" translatable="false">garneva13/stop-calls</string>
     <string name="project_url" translatable="false">https://github.com/garneva13/stop-calls</string>
-    <string name="support_url" translatable="false"></string>
+    <string name="support_url" translatable="false">https://boosty.to/garneva13</string>
 
     <!-- About screen -->
     <string name="about_title">О приложении</string>

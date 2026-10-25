@@ -231,12 +231,11 @@ app/src/main/
 ```xml
 <string name="update_repo" translatable="false">garneva13/stop-calls</string>
 <string name="project_url" translatable="false">https://github.com/garneva13/stop-calls</string>
-<string name="support_url" translatable="false"></string>
+<string name="support_url" translatable="false">https://boosty.to/garneva13</string>
 ```
 
-Пустой `support_url` просто скрывает кнопку «Поддержать» в приложении. На странице
-`docs/index.html` блок поддержки закомментирован — раскомментируйте и подставьте
-ссылку, когда она появится.
+Пустой `support_url` скрывает кнопку «Поддержать» в приложении; сейчас там ссылка на
+Boosty — она же стоит на странице `docs/index.html`.
 
 ### Важно
 

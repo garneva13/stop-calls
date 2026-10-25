@@ -1,12 +1,19 @@
 # Стоп-звонки (CallGuard)
 
+[![Поддержать автора на Boosty](https://img.shields.io/badge/Boosty-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C%20%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B0-FF6B35?style=for-the-badge)](https://boosty.to/garneva13)
+
 Приложение для Android, которое сбрасывает входящие звонки с номеров, которых нет
 в вашей адресной книге, и ведёт журнал таких звонков.
 
 **Скачать:** [последняя версия в Releases](https://github.com/garneva13/stop-calls/releases/latest)
 · **Страница проекта:** [garneva13.github.io/stop-calls](https://garneva13.github.io/stop-calls/)
 
-Android 11 и новее (minSdk 30), APK ~90 КБ, лицензия MIT.
+Android 11 и новее (minSdk 30), APK ~110 КБ, лицензия MIT.
+
+> [!TIP]
+> **Приложение бесплатное: без рекламы, подписок и платных версий.** Один человек делает его
+> в свободное время — если «Стоп-звонки» сберегли вам пару нервов, можно
+> [поддержать автора на Boosty](https://boosty.to/garneva13) ❤️
 
 Как выглядит:
 

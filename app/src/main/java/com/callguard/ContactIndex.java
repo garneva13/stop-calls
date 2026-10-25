@@ -121,9 +121,9 @@ public final class ContactIndex {
                         if (name == null) {
                             name = "";
                         }
-                        add(newExact, newTails, newNames, newTailNames,
-                                PhoneNumbers.canonical(cursor.getString(0)), name);
-                        add(newExact, newTails, newNames, newTailNames,
+                        add(context, newExact, newTails, newNames, newTailNames,
+                                cursor.getString(0), name);
+                        add(context, newExact, newTails, newNames, newTailNames,
                                 cursor.getString(1), name);
                     }
                 }
@@ -150,10 +150,10 @@ public final class ContactIndex {
         loadedAt = now;
     }
 
-    private static void add(Set<String> exactSet, Set<String> tailsSet,
+    private static void add(Context context, Set<String> exactSet, Set<String> tailsSet,
                             Map<String, String> nameMap, Map<String, String> tailNameMap,
                             String value, String name) {
-        String canonical = PhoneNumbers.canonical(value);
+        String canonical = Numbers.canonical(context, value);
         if (canonical == null) {
             return;
         }

@@ -84,14 +84,15 @@ public final class WhitelistActivity extends Activity {
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String canonical = PhoneNumbers.canonical(input.getText().toString());
+                String canonical = Numbers.canonical(WhitelistActivity.this,
+                        input.getText().toString());
                 if (canonical == null) {
                     Toast.makeText(WhitelistActivity.this, R.string.whitelist_invalid,
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
                 DbHelper.get(WhitelistActivity.this).addWhitelisted(
-                        canonical, PhoneNumbers.format(canonical));
+                        canonical, Numbers.format(WhitelistActivity.this, canonical));
                 Toast.makeText(WhitelistActivity.this, R.string.whitelist_added,
                         Toast.LENGTH_SHORT).show();
                 dialog.dismiss();

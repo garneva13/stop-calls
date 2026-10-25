@@ -340,7 +340,7 @@ public final class MainActivity extends Activity {
             TextView number = row.findViewById(R.id.textRecentNumber);
             TextView reason = row.findViewById(R.id.textRecentReason);
             TextView time = row.findViewById(R.id.textRecentTime);
-            number.setText(event.displayNumber());
+            number.setText(Numbers.display(MainActivity.this, event));
             reason.setText(Reasons.labelRes(event.reason));
             time.setText(shortTime(event.time));
             styleRowIcon(row.findViewById(R.id.iconRecent), event);

@@ -112,7 +112,8 @@ public final class DiagnosticsActivity extends Activity {
                 if (text.length() > 0) {
                     text.append('\n');
                 }
-                String head = dayTime.format(new Date(event.time)) + " · " + event.displayNumber();
+                String head = dayTime.format(new Date(event.time)) + " · "
+                        + Numbers.display(this, event);
                 text.append(getString(event.isBlocked() ? R.string.event_blocked
                         : R.string.event_allowed, head, getString(Reasons.labelRes(event.reason))));
             }
@@ -122,7 +123,7 @@ public final class DiagnosticsActivity extends Activity {
 
     private void checkNumber() {
         String input = numberInput.getText().toString();
-        String canonical = PhoneNumbers.canonical(input);
+        String canonical = Numbers.canonical(this, input);
         if (canonical == null) {
             checkResultView.setText(R.string.whitelist_invalid);
             return;
@@ -133,7 +134,7 @@ public final class DiagnosticsActivity extends Activity {
         ContactIndex.Match match = ContactIndex.lookup(this, canonical);
 
         StringBuilder out = new StringBuilder();
-        out.append(getString(R.string.diag_check_number, PhoneNumbers.format(canonical), canonical));
+        out.append(getString(R.string.diag_check_number, Numbers.format(this, canonical), canonical));
         out.append('\n');
         if (match.name == null) {
             out.append(getString(R.string.diag_check_no_contacts));

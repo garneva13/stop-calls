@@ -34,7 +34,7 @@ public final class PhoneNumbers {
             return null;
         }
         boolean international = cleaned.charAt(0) == '+';
-        String digits = onlyDigits(cleaned);
+        String digits = digitsOnly(cleaned);
         if (digits.length() < MIN_DIGITS) {
             return null;
         }
@@ -135,7 +135,11 @@ public final class PhoneNumbers {
         return s.isEmpty() ? null : s;
     }
 
-    private static String onlyDigits(String s) {
+    /** Keeps only ASCII digits. */
+    public static String digitsOnly(String s) {
+        if (s == null) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder(s.length());
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);

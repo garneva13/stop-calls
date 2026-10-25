@@ -47,6 +47,14 @@ public final class PhoneNumbersSelfTest {
         expect(null, PhoneNumbers.canonical("+"));
         expect(null, PhoneNumbers.canonical("abc"));
         expect(null, PhoneNumbers.canonical("12"));
+
+        section("fallback for non-russian countries (empty country code)");
+        // Without the Russian heuristics a national number is kept as written,
+        // and international numbers keep their country code.
+        expect("03012345678", PhoneNumbers.canonical("030 12345678", ""));
+        expect("493012345678", PhoneNumbers.canonical("+49 30 12345678", ""));
+        expect("4712345678", PhoneNumbers.canonical("+47 123 45 678", ""));
+        expect("79161234567", PhoneNumbers.canonical("+7 916 123-45-67", ""));
     }
 
     private static void matchCases() {

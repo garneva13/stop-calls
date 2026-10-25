@@ -39,7 +39,7 @@ public final class CallGuardService extends CallScreeningService {
             decision = decide(raw, verification);
         } catch (Throwable ignored) {
             decision = Decision.allow(Reasons.ALLOW_INDEX_ERROR, raw,
-                    PhoneNumbers.canonical(raw), verification, System.currentTimeMillis());
+                    Numbers.canonical(this, raw), verification, System.currentTimeMillis());
         }
 
         // The call has to be answered within five seconds, otherwise it rings.
@@ -59,7 +59,7 @@ public final class CallGuardService extends CallScreeningService {
     private Decision decide(String raw, int verification) {
         Settings settings = Settings.get(this);
         long now = System.currentTimeMillis();
-        String canonical = PhoneNumbers.canonical(raw);
+        String canonical = Numbers.canonical(this, raw);
         boolean verified = verification == Connection.VERIFICATION_STATUS_PASSED;
 
         if (!settings.isEnabled()) {

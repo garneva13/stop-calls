@@ -268,7 +268,7 @@ public final class LogActivity extends Activity {
             ImageView icon = view.findViewById(R.id.iconLog);
             View divider = view.findViewById(R.id.dividerLog);
 
-            number.setText(event.displayNumber());
+            number.setText(Numbers.display(LogActivity.this, event));
             meta.setText(clock.format(new Date(event.time)) + " · "
                     + getString(Reasons.labelRes(event.reason)));
             styleIcon(icon, event);

@@ -46,6 +46,17 @@
                 android:layout_marginTop="8dp"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/buttonBrowser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/about_download_browser" />
+
+            <TextView
+                style="@style/BodyText"
+                android:text="@string/about_browser_hint" />
         </LinearLayout>
 
         <LinearLayout style="@style/Card">

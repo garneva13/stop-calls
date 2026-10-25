@@ -59,6 +59,14 @@ public final class AboutActivity extends Activity {
         });
 
         bindSupport();
+
+        findViewById(R.id.buttonBrowser).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUrl("https://github.com/" + getString(R.string.update_repo)
+                        + "/releases/latest");
+            }
+        });
     }
 
     private void bindSupport() {
@@ -172,7 +180,7 @@ public final class AboutActivity extends Activity {
         if (input == null) {
             throw new IllegalStateException("no stream");
         }
-        File file = new File(getCacheDir(), "picked.apk");
+        File file = new File(getCacheDir(), ApkProvider.FILE_NAME);
         OutputStream output = new FileOutputStream(file);
         try {
             byte[] buffer = new byte[64 * 1024];

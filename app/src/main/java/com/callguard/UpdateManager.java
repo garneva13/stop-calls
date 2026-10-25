@@ -115,7 +115,7 @@ public final class UpdateManager {
             public void run() {
                 try {
                     postStatus(listener, app.getString(R.string.about_downloading));
-                    File file = new File(app.getCacheDir(), "update.apk");
+                    File file = new File(app.getCacheDir(), ApkProvider.FILE_NAME);
                     download(apkUrl, file);
                     postStatus(listener, app.getString(R.string.about_installing));
                     install(app, file);
@@ -266,11 +266,59 @@ public final class UpdateManager {
         }
     }
 
-    /** Hands the APK to the system installer; the user still confirms the update. */
+    /**
+     * Hands the APK to the system installer; the user still confirms the update.
+     *
+     * Two paths exist. The primary one mirrors a file-manager install: a
+     * content:// URI opened with ACTION_VIEW. The PackageInstaller session is
+     * kept as a fallback for devices without an activity for that intent.
+     */
     private static void install(Context context, File apk) throws Exception {
         if (apk == null || !apk.exists() || apk.length() == 0) {
             throw new IllegalStateException(context.getString(R.string.install_bad_file));
         }
+        File target = new File(context.getCacheDir(), ApkProvider.FILE_NAME);
+        if (!target.equals(apk)) {
+            copy(apk, target);
+        }
+        if (launchInstaller(context, target)) {
+            return;
+        }
+        installWithSession(context, target);
+    }
+
+    private static boolean launchInstaller(Context context, File apk) {
+        try {
+            android.net.Uri uri = android.net.Uri.parse(
+                    "content://" + ApkProvider.AUTHORITY + "/" + apk.getName());
+            Intent intent = new Intent(Intent.ACTION_VIEW)
+                    .setDataAndType(uri, "application/vnd.android.package-archive")
+                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            return true;
+        } catch (RuntimeException error) {
+            return false;
+        }
+    }
+
+    private static void copy(File from, File to) throws Exception {
+        InputStream input = new java.io.FileInputStream(from);
+        FileOutputStream output = new FileOutputStream(to);
+        try {
+            byte[] buffer = new byte[64 * 1024];
+            int read;
+            while ((read = input.read(buffer)) > 0) {
+                output.write(buffer, 0, read);
+            }
+            output.flush();
+        } finally {
+            output.close();
+            input.close();
+        }
+    }
+
+    private static void installWithSession(Context context, File apk) throws Exception {
         PackageInstaller installer = context.getPackageManager().getPackageInstaller();
         PackageInstaller.SessionParams params = new PackageInstaller.SessionParams(
                 PackageInstaller.SessionParams.MODE_FULL_INSTALL);

@@ -219,7 +219,9 @@
     <string name="action_update_install">Установить</string>
     <string name="toast_no_browser">Не нашлось приложения, чтобы открыть ссылку</string>
     <string name="install_success">Обновление установлено</string>
-    <string name="install_failed">Установка не удалась: %1$s</string>
+    <string name="install_failed">Установка не удалась (код %1$d).%2$s</string>
+    <string name="about_download_browser">Скачать в браузере</string>
+    <string name="about_browser_hint">Если установка из приложения не сработала — скачайте APK в браузере и откройте его.</string>
     <string name="install_unknown_sources">Разрешите «Стоп-звонкам» установку приложений и повторите</string>
     <string name="install_bad_file">Не удалось прочитать APK</string>
     <string name="install_started">Установка началась</string>

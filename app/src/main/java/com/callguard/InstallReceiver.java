@@ -22,8 +22,9 @@ public final class InstallReceiver extends BroadcastReceiver {
             Toast.makeText(context, R.string.install_success, Toast.LENGTH_SHORT).show();
         } else {
             String message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE);
+            String detail = (message == null || message.trim().isEmpty()) ? "" : " " + message;
             Toast.makeText(context,
-                    context.getString(R.string.install_failed, message == null ? "" : message),
+                    context.getString(R.string.install_failed, status, detail),
                     Toast.LENGTH_LONG).show();
         }
     }

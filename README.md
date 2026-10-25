@@ -6,7 +6,7 @@
 **Скачать:** [последняя версия в Releases](https://github.com/garneva13/stop-calls/releases/latest)
 · **Страница проекта:** [garneva13.github.io/stop-calls](https://garneva13.github.io/stop-calls/)
 
-Android 11 и новее (minSdk 30), Pixel 8 Pro подходит. APK ~90 КБ, лицензия MIT.
+Android 11 и новее (minSdk 30), APK ~90 КБ, лицензия MIT.
 
 Как выглядит (отрисовка по реальной разметке, не скриншот с устройства):
 

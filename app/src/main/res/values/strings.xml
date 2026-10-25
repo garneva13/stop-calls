@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Стоп-звонки</string>
+    <string name="app_tagline">Сброс входящих с номеров, которых нет в контактах</string>
+
+    <string name="filter_switch">Фильтр входящих звонков</string>
+
+    <string name="status_inactive">Не активировано</string>
+    <string name="status_inactive_hint">Нажмите «Назначить» и выберите в системном окне «Стоп-звонки», а не «Телефон».</string>
+    <string name="status_disabled">Фильтр выключен</string>
+    <string name="status_disabled_hint">Проходят все входящие звонки.</string>
+    <string name="status_paused">Пауза</string>
+    <string name="status_paused_hint">Пока фильтр приостановлен, проходят все звонки.</string>
+    <string name="status_on">Фильтр включён</string>
+    <string name="status_on_hint">Звонки с номеров не из контактов сбрасываются.</string>
+    <string name="status_allow_next_hint">Следующий незнакомый звонок будет пропущен.</string>
+
+    <string name="section_requirements">Что нужно для работы</string>
+    <string name="requirement_contacts_ok">Доступ к контактам: есть, номеров — %1$d</string>
+    <string name="requirement_contacts_missing">Доступ к контактам: не выдан</string>
+    <string name="requirement_role_ok">Роль «Фильтрация вызовов»: назначена</string>
+    <string name="requirement_role_missing">Роль «Фильтрация вызовов»: не назначена</string>
+
+    <string name="section_pause">Временное отключение</string>
+    <string name="pause_hint">Включите паузу или пропустите следующий звонок, если ждёте курьера, врача или другой незнакомый номер.</string>
+    <string name="pause_active">Пауза до %1$s</string>
+    <string name="allow_next_active">Пропуск действует до %1$s</string>
+
+    <string name="section_rules">Правила</string>
+    <string name="block_unverified">Блокировать звонки без маркера проверки номера</string>
+    <string name="block_unverified_hint">Маркер (STIR/SHAKEN) подтверждает номер на стороне оператора. В России он почти не передаётся, поэтому включать не рекомендуется: под блокировку попадут и ваши контакты.</string>
+
+    <string name="counters_blocked">Заблокировано звонков: %1$d</string>
+
+    <string name="section_about">Как это работает</string>
+    <string name="about_text">Система сообщает приложению о входящем звонке до того, как телефон зазвонит. Приложение сверяет номер со списком контактов и отклоняет вызов, если номера там нет. Всё происходит на телефоне: интернет приложению не нужен, данные никуда не отправляются.\n\nПриложения-фильтры не получают звонки со скрытых и приватных номеров — система не передаёт их. Чтобы блокировать и такие, включите в приложении «Телефон» настройку блокировки неизвестных вызовов.</string>
+
+    <string name="action_done">Готово</string>
+    <string name="action_allow">Разрешить</string>
+    <string name="action_assign">Назначить</string>
+    <string name="action_pause_hour">Пауза на 1 час</string>
+    <string name="action_resume">Снять паузу</string>
+    <string name="action_allow_next">Пропустить следующий</string>
+    <string name="action_log">Журнал (%1$d)</string>
+    <string name="action_whitelist">Разрешённые (%1$d)</string>
+    <string name="action_add">Добавить</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_clear">Очистить</string>
+
+    <string name="toast_allow_next">Следующий незнакомый звонок будет пропущен</string>
+    <string name="toast_permission_denied">Без доступа к контактам приложение не сможет сверять номера</string>
+    <string name="toast_role_denied">Роль не назначена — фильтр не работает</string>
+    <string name="toast_role_granted">Роль назначена — фильтр активен</string>
+    <string name="toast_role_unavailable">На этом устройстве роль фильтрации вызовов недоступна</string>
+
+    <string name="log_title">Журнал</string>
+    <string name="log_empty">Пока пусто.\nЗдесь появятся номера, которые не прошли проверку.</string>
+    <string name="log_summary">Записей: %1$d</string>
+    <string name="log_clear_confirm">Удалить все записи журнала?</string>
+    <string name="log_meta">%1$s · %2$s</string>
+
+    <string name="reason_unknown">Нет в контактах</string>
+    <string name="reason_unknown_verified">Нет в контактах, номер подтверждён оператором</string>
+    <string name="reason_contact_unverified">Контакт без маркера проверки</string>
+    <string name="reason_contact">Номер в контактах</string>
+    <string name="reason_whitelist">В белом списке</string>
+    <string name="reason_filter_off">Фильтр выключен</string>
+    <string name="reason_paused">Пауза</string>
+    <string name="reason_allow_next">Разовый пропуск</string>
+    <string name="reason_no_number">Номер не распознан</string>
+    <string name="reason_index_error">Контакты недоступны — пропущен</string>
+
+    <string name="diag_title">Диагностика</string>
+    <string name="diag_hint">Проверьте, доходят ли звонки до приложения и что оно с ними делает.</string>
+    <string name="diag_state_title">Состояние</string>
+    <string name="diag_check_title">Проверка номера</string>
+    <string name="diag_events_title">Последние звонки</string>
+    <string name="diag_check">Проверить</string>
+    <string name="diag_clear">Очистить историю</string>
+    <string name="diag_number_hint">Номер телефона</string>
+    <string name="diag_role_ok">Роль фильтрации: назначена</string>
+    <string name="diag_role_missing">Роль фильтрации: НЕ назначена — Android не передаёт звонки приложению</string>
+    <string name="diag_contacts_ok">Доступ к контактам: есть, номеров — %1$d</string>
+    <string name="diag_contacts_missing">Доступ к контактам: НЕ выдан</string>
+    <string name="diag_filter_on">Фильтр: включён</string>
+    <string name="diag_filter_off">Фильтр: выключен</string>
+    <string name="diag_pause_on">Пауза до %1$s</string>
+    <string name="diag_pause_off">Пауза: нет</string>
+    <string name="diag_counts">Событий: %1$d, из них сброшено: %2$d</string>
+    <string name="diag_no_events">Событий нет. Если после назначения роли звонки сюда не попадают — Android не вызывает приложение.</string>
+    <string name="diag_check_number">Номер: %1$s (%2$s)</string>
+    <string name="diag_check_contacts">В контактах: да — %1$s</string>
+    <string name="diag_check_contacts_noname">В контактах: да</string>
+    <string name="diag_check_no_contacts">В контактах: нет</string>
+    <string name="diag_check_whitelist">В белом списке: да</string>
+    <string name="diag_check_no_whitelist">В белом списке: нет</string>
+    <string name="diag_would_block">Фильтр сбросил бы этот звонок</string>
+    <string name="diag_would_allow">Фильтр пропустил бы этот звонок</string>
+    <string name="event_blocked">%1$s — сброшен: %2$s</string>
+    <string name="event_allowed">%1$s — пропущен: %2$s</string>
+
+    <string name="role_help_title">Если роль не назначается</string>
+    <string name="role_help_text">В системном окне «Caller ID &amp; spam app» выберите «Стоп-звонки». Если выбрать «Телефон», роль останется у Google Phone и фильтр не заработает.\n\nВручную: Настройки → Приложения → Приложения по умолчанию → Caller ID &amp; spam app → «Стоп-звонки».</string>
+    <string name="role_dialog_title">Роль не назначена</string>
+    <string name="role_dialog_message">В системном окне нужно выбрать «Стоп-звонки», а не «Телефон». Пока роль у Google Phone, Android не передаёт звонки приложению, поэтому звонки проходят, а журнал остаётся пустым.\n\nВручную: Настройки → Приложения → Приложения по умолчанию → Caller ID &amp; spam app → «Стоп-звонки».</string>
+    <string name="action_open_settings">Открыть настройки</string>
+    <string name="action_close">Закрыть</string>
+
+    <string name="marker_passed">маркер: есть</string>
+    <string name="marker_failed">маркер: не пройден</string>
+    <string name="marker_none">маркер: нет</string>
+
+    <string name="whitelist_title">Разрешённые номера</string>
+    <string name="whitelist_empty">Список пуст.\nДобавьте сюда номера, которые должны проходить всегда.</string>
+    <string name="whitelist_hint">Эти номера проходят всегда, даже если фильтр включён.</string>
+    <string name="whitelist_add">Добавить номер</string>
+    <string name="whitelist_add_hint">+7 900 000-00-00</string>
+    <string name="whitelist_added">Номер добавлен</string>
+    <string name="whitelist_removed">Номер удалён</string>
+    <string name="whitelist_invalid">Не удалось распознать номер</string>
+    <string name="whitelist_delete_confirm">Удалить %1$s из списка?</string>
+
+    <!-- Pause schedule -->
+    <string name="schedule_title">Пауза по расписанию</string>
+    <string name="schedule_hint">В выбранные дни и часы фильтр не блокирует звонки с незнакомых номеров — удобно, если ждёте доставку или звонок из больницы в рабочее время.</string>
+    <string name="schedule_enable">Включить расписание</string>
+    <string name="schedule_days">Дни недели</string>
+    <string name="schedule_time_range">Время</string>
+    <string name="schedule_start">Начало</string>
+    <string name="schedule_end">Конец</string>
+    <string name="schedule_default_start">09:00</string>
+    <string name="schedule_default_end">18:00</string>
+    <string name="schedule_summary">Пауза: %1$s</string>
+    <string name="schedule_now_active">Сейчас: пауза действует</string>
+    <string name="schedule_now_inactive">Сейчас: пауза не действует</string>
+    <string name="schedule_note">Если время окончания меньше времени начала, пауза переходит через полночь — например, 22:00–08:00.</string>
+    <string name="schedule_open">Настроить</string>
+    <string name="schedule_state_on">Расписание: %1$s</string>
+    <string name="schedule_state_off">Расписание выключено</string>
+    <string name="schedule_every_day">каждый день</string>
+    <string name="schedule_weekdays">будни</string>
+    <string name="schedule_weekend">выходные</string>
+    <string name="schedule_no_days">дни не выбраны</string>
+    <string name="schedule_format">%1$s, %2$s–%3$s</string>
+    <string name="schedule_active_short">действует сейчас</string>
+    <string name="schedule_inactive_short">не действует</string>
+    <string name="status_schedule">Пауза по расписанию</string>
+    <string name="status_schedule_hint">Звонки не блокируются до %1$s — действует расписание</string>
+    <string name="diag_schedule_on">Расписание: %1$s — %2$s</string>
+    <string name="diag_schedule_off">Расписание: выключено</string>
+    <string name="reason_schedule">Пауза по расписанию</string>
+
+    <!-- Home screen (dashboard) -->
+    <string name="hero_inactive_title">Не активировано</string>
+    <string name="hero_inactive_hint">Нажмите, чтобы выбрать «Стоп-звонки» в роли фильтрации</string>
+    <string name="hero_off_title">Фильтр выключен</string>
+    <string name="hero_off_hint">Все входящие звонки проходят</string>
+    <string name="hero_on_title">Фильтр включён</string>
+    <string name="hero_on_hint">Звонки не из контактов сбрасываются</string>
+    <string name="hero_paused_title">Пауза</string>
+    <string name="hero_paused_hint">До %1$s звонки не блокируются</string>
+    <string name="hero_schedule_title">Пауза по расписанию</string>
+    <string name="hero_schedule_hint">До %1$s звонки не блокируются</string>
+    <string name="today_blocked">Сегодня сброшено: %1$d</string>
+    <string name="today_none">Сегодня сбросов не было</string>
+    <string name="last_blocked">последний в %1$s</string>
+    <string name="recent_title">Последние блокировки</string>
+    <string name="recent_open">Весь журнал</string>
+    <string name="recent_empty">Пока никого не блокировали. Здесь появятся незнакомые номера.</string>
+    <string name="week_blocked">сброшено за неделю</string>
+    <string name="week_allowed">пропущено за неделю</string>
+    <string name="chip_pause">Пауза 1 ч</string>
+    <string name="chip_resume">Снять паузу</string>
+    <string name="chip_skip">Пропустить</string>
+    <string name="chip_skip_active">Пропуск включён</string>
+    <string name="chip_schedule">Расписание</string>
+    <string name="more_whitelist">Белый список</string>
+    <string name="more_whitelist_count">номеров: %1$d</string>
+    <string name="more_rules">Правила</string>
+    <string name="more_rules_sub">маркер номера, проверка контактов</string>
+    <string name="more_diag_sub">роль и последние звонки</string>
+    <string name="permission_missing">Нет доступа к контактам — фильтр не сможет сверять номера</string>
+    <string name="toast_permission_needed">Без доступа к контактам фильтр не работает</string>
+    <string name="toast_paused">Фильтр на паузе 1 час</string>
+
+    <!-- Journal -->
+    <string name="log_today">Сегодня</string>
+    <string name="log_yesterday">Вчера</string>
+    <string name="log_filter_all">Все %1$d</string>
+    <string name="log_filter_blocked">Сброшенные %1$d</string>
+    <string name="log_filter_allowed">Пропущенные %1$d</string>
+    <string name="log_empty_filtered">Здесь пусто. Попробуйте другой фильтр.</string>
+
+    <!-- Distribution -->
+    <string name="update_repo" translatable="false">garneva13/stop-calls</string>
+    <string name="project_url" translatable="false">https://github.com/garneva13/stop-calls</string>
+    <string name="support_url" translatable="false"></string>
+
+    <!-- About screen -->
+    <string name="about_title">О приложении</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_check">Проверить обновление</string>
+    <string name="about_checking">Проверяю…</string>
+    <string name="about_latest">У вас последняя версия</string>
+    <string name="about_available">Доступна версия %1$s</string>
+    <string name="about_downloading">Скачиваю обновление…</string>
+    <string name="about_installing">Открываю системный установщик…</string>
+    <string name="about_error">Не удалось проверить обновление: %1$s</string>
+    <string name="about_not_configured">Обновления не настроены: укажите репозиторий в строке update_repo</string>
+    <string name="about_install_file">Установить из файла</string>
+    <string name="about_install_file_hint">Если вы скачали APK вручную — выберите его здесь, и Android поставит обновление поверх. Журнал и настройки сохранятся.</string>
+    <string name="about_privacy">Сеть используется только для проверки обновлений на GitHub: один запрос к api.github.com и загрузка APK оттуда. Никакие данные о звонках, контактах или журнале никуда не отправляются — у приложения нет и не будет такой логики.\n\nЖурнал, белый список и настройки хранятся только на телефоне.</string>
+    <string name="about_network_note">Проверка обновлений — единственное сетевое действие. Его можно не использовать: обновляйтесь файлом.</string>
+    <string name="about_project">Страница проекта</string>
+    <string name="about_support">Поддержать автора</string>
+    <string name="about_support_title">Поддержать</string>
+    <string name="about_privacy_title">Приватность и сеть</string>
+    <string name="action_update_install">Установить</string>
+    <string name="toast_no_browser">Не нашлось приложения, чтобы открыть ссылку</string>
+    <string name="install_success">Обновление установлено</string>
+    <string name="install_failed">Установка не удалась: %1$s</string>
+    <string name="install_unknown_sources">Разрешите «Стоп-звонкам» установку приложений и повторите</string>
+    <string name="install_bad_file">Не удалось прочитать APK</string>
+    <string name="install_started">Установка началась</string>
+    <string name="update_needs_network">Нет соединения с GitHub</string>
+
+    <string-array name="schedule_day_names">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </string-array>
+</resources>

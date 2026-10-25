@@ -13,7 +13,7 @@ param(
     [switch]$Clean,
     [string]$Version = '1.0',
     [int]$VersionCode = 1,
-    [int]$MinSdk = 30,
+    [int]$MinSdk = 29,
     [int]$TargetSdk = 34
 )
 

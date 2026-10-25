@@ -1,6 +1,7 @@
 package com.callguard;
 
 import android.net.Uri;
+import android.os.Build;
 import android.telecom.Call;
 import android.telecom.CallScreeningService;
 import android.telecom.Connection;
@@ -28,10 +29,13 @@ public final class CallGuardService extends CallScreeningService {
 
         String raw = rawNumber(callDetails);
         int verification = 0;
-        try {
-            verification = callDetails.getCallerNumberVerificationStatus();
-        } catch (Throwable ignored) {
-            // Older or unusual builds may not provide it; 0 means "not verified".
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                // The carrier verification marker exists from Android 11 only.
+                verification = callDetails.getCallerNumberVerificationStatus();
+            } catch (Throwable ignored) {
+                // Older or unusual builds may not provide it; 0 means "not verified".
+            }
         }
 
         Decision decision;

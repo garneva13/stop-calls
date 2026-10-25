@@ -8,7 +8,7 @@
 **Скачать:** [последняя версия в Releases](https://github.com/garneva13/stop-calls/releases/latest)
 · **Страница проекта:** [garneva13.github.io/stop-calls](https://garneva13.github.io/stop-calls/)
 
-Android 11 и новее (minSdk 30), APK ~110 КБ, лицензия MIT.
+Android 10 и новее (minSdk 29), APK ~110 КБ, лицензия MIT.
 
 > [!TIP]
 > **Приложение бесплатное: без рекламы, подписок и платных версий.** Один человек делает его

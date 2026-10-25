@@ -40,6 +40,19 @@
           padding:14px 16px;margin-bottom:10px}
   summary{cursor:pointer;font-weight:600}
   details p{color:var(--muted);margin:10px 0 0;font-size:14px}
+  .support{position:relative;margin:44px 0 10px;padding:34px 24px 30px;border-radius:28px;text-align:center;
+           background:linear-gradient(135deg,#e7f0ff,#f4e9ff 55%,#e9f7ee);border:1px solid #cbd9f2;
+           box-shadow:0 18px 44px rgba(11,87,208,.12)}
+  @media (prefers-color-scheme: dark){
+    .support{background:linear-gradient(135deg,#16233d,#2a2036 60%,#152a20);border-color:#33456a;box-shadow:none}
+  }
+  .support .heart{width:66px;height:66px;border-radius:50%;margin:0 auto 14px;display:flex;
+                  align-items:center;justify-content:center;background:var(--card);border:1px solid var(--stroke);
+                  box-shadow:0 8px 18px rgba(226,85,127,.22)}
+  .support h2{margin:0 0 8px;font-size:24px}
+  .support p{margin:0 auto 18px;max-width:520px;color:var(--muted);font-size:15px}
+  .support p.support-note{margin:12px auto 0;font-size:13px}
+  .btn.big{padding:15px 34px;font-size:17px;box-shadow:0 12px 26px rgba(11,87,208,.30)}
   footer{margin-top:56px;color:var(--muted);font-size:13px;border-top:1px solid var(--stroke);padding-top:18px}
   .pill{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--card);
         border:1px solid var(--stroke);font-size:12px;color:var(--muted);margin-right:6px}
@@ -84,6 +97,19 @@
     </div>
   </div>
 
+  <section class="support">
+    <div class="heart">
+      <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 20.6 4.9 13.5A4.7 4.7 0 0 1 12 7.2a4.7 4.7 0 0 1 7.1 6.3Z" fill="#e2557f"/>
+      </svg>
+    </div>
+    <h2>Поддержите автора</h2>
+    <p>Приложение бесплатное: без рекламы, без подписок и без платных версий. Если «Стоп-звонки»
+    сберегли вам пару нервов — можно отблагодарить автора.</p>
+    <a class="btn primary big" href="https://boosty.to/garneva13">Поддержать на Boosty</a>
+    <p class="support-note">Спасибо, что пользуетесь приложением.</p>
+  </section>
+
   <h2>Установка</h2>
   <ol class="steps">
     <li>Скачайте APK на телефон и откройте его. Разрешите установку из неизвестного источника для файлового менеджера.</li>
@@ -117,13 +143,9 @@
     одним номером. Иначе форматирование ломало бы сверку.</p>
   </details>
 
-  <h2>Поддержать</h2>
-  <p>Приложение бесплатное, без рекламы и без платных версий. Если оно экономит вам время
-  и нервы — можно отблагодарить автора:</p>
-  <p><a class="btn ghost" href="https://boosty.to/garneva13">Поддержать автора на Boosty</a></p>
-
   <footer>
-    Исходный код открыт: <a href="https://github.com/garneva13/stop-calls">github.com/garneva13/stop-calls</a>.
+    Исходный код открыт: <a href="https://github.com/garneva13/stop-calls">github.com/garneva13/stop-calls</a>
+    · <a href="https://boosty.to/garneva13">Поддержать автора</a>.
     Лицензия MIT. Приложение не связано с Google; Android — торговая марка Google LLC.
   </footer>
 </div>

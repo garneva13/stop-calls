@@ -61,7 +61,7 @@ Android 11 и новее (minSdk 30), APK ~110 КБ, лицензия MIT.
    неизвестных приложений).
 3. Либо по USB с компьютера:
    ```
-   adb install -r CallGuard-1.5.apk
+   adb install -r CallGuard-1.8.apk
    ```
 
 APK подписан отладочным ключом — для личной установки это нормально, в Google Play
@@ -206,7 +206,7 @@ app/src/main/
   от «Android вообще не вызвал приложение».
 * **Отклонение**: `setDisallowCall(true)` + `setRejectCall(true)` — вызов
   сбрасывается, как если бы вы нажали «отклонить», а не уходит в голосовую почту.
-* **Только framework API, без AndroidX и Material** — поэтому APK весит ~90 КБ
+* **Только framework API, без AndroidX и Material** — поэтому APK весит ~110 КБ
   и собирается без Gradle и без интернета.
 
 ---
@@ -217,11 +217,11 @@ app/src/main/
 в `docs/index.html`. Остаётся выпустить релиз:
 
 ```powershell
-.\build-apk.ps1 -Version 1.6 -VersionCode 7
+.\build-apk.ps1 -Version 1.9 -VersionCode 10
 ```
 
-Затем на GitHub: *Releases → Draft a new release*, тег **`v1.6`** (обязательно с
-буквой `v`), прикрепить файл `dist/CallGuard-1.6.apk` и опубликовать.
+Затем на GitHub: *Releases → Draft a new release*, тег **`v1.9`** (обязательно с
+буквой `v`), прикрепить файл `dist/CallGuard-1.9.apk` и опубликовать.
 
 Что произойдёт дальше: приложение по кнопке «Проверить обновление» запросит
 `repos/garneva13/stop-calls/releases/latest`, сравнит `tag_name` со своей версией,
@@ -250,7 +250,7 @@ Boosty — она же стоит на странице `docs/index.html`.
 * **Не коммитьте `keystore/debug.keystore`** — с ним кто угодно сможет подписать
   «обновление» вашей подписью и поставить его поверх. Он уже в `.gitignore`.
 
-* Тег релиза начинайте с `v` (`v1.5`) — парсер это учитывает.
+* Тег релиза начинайте с `v` (`v1.9`) — парсер это учитывает.
 * Без токена GitHub отдаёт 60 запросов в час с IP — для ручной проверки хватает.
 
 ---
@@ -275,7 +275,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-apk.ps1 -Clean
 6. `zipalign`, `apksigner` (v2 + v3), проверка подписи;
 7. результат копируется в `dist/CallGuard-<версия>.apk`.
 
-Параметры: `-Version 1.2 -VersionCode 3` для новой версии, `-MinSdk`, `-TargetSdk`.
+Параметры: `-Version 1.9 -VersionCode 10` для новой версии, `-MinSdk`, `-TargetSdk`.
 
 ### Самотесты логики
 

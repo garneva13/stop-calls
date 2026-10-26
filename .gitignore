@@ -3,3 +3,7 @@ dist/*.apk
 tools/out/
 keystore/
 *.log
+
+# python
+__pycache__/
+*.pyc

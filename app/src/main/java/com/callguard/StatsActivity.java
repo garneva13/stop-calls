@@ -333,6 +333,7 @@ public final class StatsActivity extends LocalizedActivity {
             labels[hour] = hour % 6 == 0
                     ? String.format(Locale.getDefault(), "%02d:00", hour) : null;
         }
+        labels[23] = "24:00";
         return labels;
     }
 

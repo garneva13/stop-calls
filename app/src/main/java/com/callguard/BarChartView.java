@@ -78,6 +78,8 @@ public final class BarChartView extends View {
 
         float slot = (right - left) / count;
         float barWidth = Math.min(dp(26), slot * 0.56f);
+        // Numbers above bars collide when there are many bars (month, day view).
+        boolean numbers = showNumbers && count <= 14;
 
         for (int index = 0; index < count; index++) {
             float center = left + slot * index + slot / 2f;
@@ -88,7 +90,7 @@ public final class BarChartView extends View {
                 canvas.drawRoundRect(rect, dp(5), dp(5), barPaint);
             }
 
-            if (showNumbers && values[index] > 0) {
+            if (numbers && values[index] > 0) {
                 textPaint.setTextSize(dp(10));
                 textPaint.setTextAlign(Paint.Align.CENTER);
                 canvas.drawText(String.valueOf(values[index]), center,

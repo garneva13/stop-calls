@@ -2,6 +2,12 @@
 
 [![Поддержать автора на Boosty](https://img.shields.io/badge/Boosty-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C%20%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B0-FF6B35?style=for-the-badge)](https://boosty.to/garneva13)
 
+[![Release](https://img.shields.io/github/v/release/garneva13/stop-calls?style=flat-square)](https://github.com/garneva13/stop-calls/releases)
+[![License](https://img.shields.io/github/license/garneva13/stop-calls?style=flat-square)](LICENSE)
+[![Android](https://img.shields.io/badge/Android-10%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](#)
+[![Size](https://img.shields.io/badge/APK-275%20KB-lightgrey?style=flat-square)](#)
+[![Stars](https://img.shields.io/github/stars/garneva13/stop-calls?style=flat-square)](https://github.com/garneva13/stop-calls/stargazers)
+
 Приложение для Android, которое сбрасывает входящие звонки с номеров, которых нет
 в вашей адресной книге, и ведёт журнал таких звонков.
 

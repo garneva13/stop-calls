@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://garneva13.github.io/stop-calls/sitemap.xml

@@ -1,6 +1,5 @@
 package com.callguard;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Numbers that are always allowed through, even when the filter is on. */
-public final class WhitelistActivity extends Activity {
+public final class WhitelistActivity extends LocalizedActivity {
 
     private final List<WhitelistEntry> items = new ArrayList<>();
 

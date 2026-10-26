@@ -60,6 +60,8 @@
   .brand{display:flex;align-items:center;gap:14px;margin-bottom:10px}
   .brand h1{margin:0}
   .logo{width:56px;height:56px;border-radius:15px;display:block;flex:none}
+  .lang{margin-left:auto;font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;
+        border:1px solid var(--stroke);padding:6px 12px;border-radius:999px;background:var(--card)}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
   .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);padding:18px}
   .card h3{margin:0 0 6px;font-size:16px}
@@ -99,6 +101,7 @@
       <div class="brand">
         <img class="logo" src="logo.png" width="56" height="56" alt="Логотип Стоп-звонки">
         <h1>Стоп-звонки</h1>
+        <a class="lang" href="en/">EN</a>
       </div>
       <p class="lead">Сбрасывает входящие с номеров, которых нет в ваших контактах, до первого гудка.
       Ведёт журнал, знает про паузу и белый список. Без рекламы, без аккаунта, без слежки.</p>

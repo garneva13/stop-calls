@@ -26,4 +26,13 @@
     <color name="icon_amber">#F5B04C</color>
     <color name="icon_amber_bg">#2A2113</color>
     <color name="icon_blue_bg">#1E2A3D</color>
+    <color name="tile_accent_bg">#16233D</color>
+    <color name="tile_warn_bg">#2A2113</color>
+    <color name="chart_bar">#F05454</color>
+    <color name="chart_bar_soft">#4A2626</color>
+    <color name="chart_grid">#2A3036</color>
+    <color name="chart_good">#6DD58C</color>
+    <color name="chart_bad">#F2B8B5</color>
+    <color name="segment_active">#2563EB</color>
+    <color name="segment_container">#1A1E23</color>
 </resources>

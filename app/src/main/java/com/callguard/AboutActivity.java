@@ -1,6 +1,5 @@
 package com.callguard;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /** Version, update check, manual APK install and support links. */
-public final class AboutActivity extends Activity {
+public final class AboutActivity extends LocalizedActivity {
 
     private static final int REQ_PICK_APK = 2001;
 
@@ -28,6 +27,7 @@ public final class AboutActivity extends Activity {
     private LinearLayout cardSupport;
     private Button buttonSupport;
     private Button buttonProject;
+    private Button buttonLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,15 @@ public final class AboutActivity extends Activity {
         });
 
         bindSupport();
+
+        buttonLanguage = findViewById(R.id.buttonLanguage);
+        buttonLanguage.setText(languageLabel());
+        buttonLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLanguageDialog();
+            }
+        });
 
         findViewById(R.id.buttonBrowser).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,6 +230,54 @@ public final class AboutActivity extends Activity {
             return false;
         }
         return true;
+    }
+
+    private String languageLabel() {
+        String code = Settings.get(this).language();
+        if ("ru".equals(code)) {
+            return getString(R.string.language_ru);
+        }
+        if ("en".equals(code)) {
+            return getString(R.string.language_en);
+        }
+        return getString(R.string.language_system);
+    }
+
+    private void showLanguageDialog() {
+        final String[] codes = {LocaleHelper.SYSTEM, "ru", "en"};
+        final String[] labels = {
+                getString(R.string.language_system),
+                getString(R.string.language_ru),
+                getString(R.string.language_en)
+        };
+        String current = Settings.get(this).language();
+        int checked = 0;
+        for (int index = 0; index < codes.length; index++) {
+            if (codes[index].equals(current)) {
+                checked = index;
+                break;
+            }
+        }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.language_title)
+                .setSingleChoiceItems(labels, checked, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Settings.get(AboutActivity.this).setLanguage(codes[which]);
+                        dialog.dismiss();
+                        restartApp();
+                    }
+                })
+                .setNegativeButton(R.string.action_cancel, null)
+                .show();
+    }
+
+    /** Recreates the task so every screen picks up the new language. */
+    private void restartApp() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finishAffinity();
     }
 
     private void openUrl(String url) {

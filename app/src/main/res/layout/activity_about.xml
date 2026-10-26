@@ -72,6 +72,19 @@
                 android:text="@string/about_install_file_hint" />
         </LinearLayout>
 
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                style="@style/SectionTitle"
+                android:text="@string/language_title" />
+
+            <Button
+                android:id="@+id/buttonLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/cardSupport"
             style="@style/Card"

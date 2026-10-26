@@ -11,19 +11,19 @@ public final class Settings {
     private static final String PREFS = "callguard";
     private static final String KEY_ENABLED = "enabled";
     private static final String KEY_PAUSED_UNTIL = "paused_until";
-    private static final String KEY_ALLOW_NEXT_UNTIL = "allow_next_until";
+    private static final String KEY_ALLOW_NEXT = "allow_next";
     private static final String KEY_BLOCK_UNVERIFIED = "block_unverified";
     private static final String KEY_SCHEDULE_ON = "schedule_on";
     private static final String KEY_SCHEDULE_START = "schedule_start";
     private static final String KEY_SCHEDULE_END = "schedule_end";
     private static final String KEY_SCHEDULE_DAYS = "schedule_days";
+    private static final String KEY_LANGUAGE = "language";
 
     /** Default schedule window: weekday working hours. */
     private static final int DEFAULT_START = 9 * 60;
     private static final int DEFAULT_END = 18 * 60;
 
     /** How long the one-shot "let the next unknown call through" lasts. */
-    public static final long ALLOW_NEXT_WINDOW_MS = 15L * 60L * 1000L;
     /** How long a pause lasts. */
     public static final long PAUSE_MS = 60L * 60L * 1000L;
 
@@ -32,7 +32,11 @@ public final class Settings {
     private final SharedPreferences prefs;
 
     private Settings(Context context) {
-        prefs = context.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+        Context app = context.getApplicationContext();
+        if (app == null) {
+            app = context;
+        }
+        prefs = app.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     }
 
     public static synchronized Settings get(Context context) {
@@ -74,23 +78,22 @@ public final class Settings {
         prefs.edit().putLong(KEY_PAUSED_UNTIL, 0L).apply();
     }
 
-    public long allowNextUntil() {
-        return prefs.getLong(KEY_ALLOW_NEXT_UNTIL, 0L);
+    public boolean hasAllowNext() {
+        return prefs.getBoolean(KEY_ALLOW_NEXT, false);
     }
 
-    public boolean hasAllowNext() {
-        return allowNextUntil() > System.currentTimeMillis();
+    /** Cancels the one-shot pass without letting a call through. */
+    public void cancelAllowNext() {
+        prefs.edit().putBoolean(KEY_ALLOW_NEXT, false).apply();
     }
 
     public void allowNextOnce() {
-        prefs.edit()
-                .putLong(KEY_ALLOW_NEXT_UNTIL, System.currentTimeMillis() + ALLOW_NEXT_WINDOW_MS)
-                .apply();
+        prefs.edit().putBoolean(KEY_ALLOW_NEXT, true).apply();
     }
 
     /** Consumes the one-shot permission; called when an unknown call is let through. */
     public void consumeAllowNext() {
-        prefs.edit().putLong(KEY_ALLOW_NEXT_UNTIL, 0L).apply();
+        prefs.edit().putBoolean(KEY_ALLOW_NEXT, false).apply();
     }
 
     // ------------------------------------------------------------- schedule
@@ -137,5 +140,16 @@ public final class Settings {
         int minuteOfDay = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
         return Schedule.isActive(scheduleDays(), scheduleStart(), scheduleEnd(),
                 dayIndex, minuteOfDay);
+    }
+
+    // ------------------------------------------------------------- language
+
+    /** "system", "ru" or "en". */
+    public String language() {
+        return prefs.getString(KEY_LANGUAGE, "system");
+    }
+
+    public void setLanguage(String code) {
+        prefs.edit().putString(KEY_LANGUAGE, code).apply();
     }
 }

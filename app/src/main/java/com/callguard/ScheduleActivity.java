@@ -1,6 +1,5 @@
 package com.callguard;
 
-import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 /** Weekly schedule during which the filter lets unknown calls through. */
-public final class ScheduleActivity extends Activity {
+public final class ScheduleActivity extends LocalizedActivity {
 
     private Switch switchSchedule;
     private LinearLayout dayContainer;

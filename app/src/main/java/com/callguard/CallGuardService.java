@@ -58,6 +58,13 @@ public final class CallGuardService extends CallScreeningService {
         } catch (Throwable ignored) {
             // A logging failure must never affect the call itself.
         }
+
+        try {
+            // Keep the status notification in sync with today's counters.
+            Indicator.update(this);
+        } catch (Throwable ignored) {
+            // The indicator is cosmetic; never let it break screening.
+        }
     }
 
     private Decision decide(String raw, int verification) {

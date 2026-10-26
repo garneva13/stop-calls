@@ -1,17 +1,20 @@
 package com.callguard;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 /** Journal: every screened call, grouped by day and filterable. */
-public final class LogActivity extends Activity {
+public final class LogActivity extends LocalizedActivity {
 
     private static final int MAX_ROWS = 500;
 
@@ -63,6 +66,20 @@ public final class LogActivity extends Activity {
         adapter = new LogAdapter();
         list.setAdapter(adapter);
 
+        // Long press copies the number so it can be pasted into a search engine.
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
+                                           long id) {
+                Object item = rows.get(position);
+                if (!(item instanceof CallEvent)) {
+                    return false;
+                }
+                copyNumber((CallEvent) item);
+                return true;
+            }
+        });
+
         filterAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,8 +113,22 @@ public final class LogActivity extends Activity {
         reload();
     }
 
-    private void setFilter(int value) {
-        if (filter == value) {
+    private void copyNumber(CallEvent event) {
+        String number = event.canonical != null
+                ? Numbers.format(this, event.canonical)
+                : (event.raw == null ? "" : event.raw);
+        if (number.isEmpty()) {
+            return;
+        }
+        ClipboardManager clipboard = getSystemService(ClipboardManager.class);
+        if (clipboard == null) {
+            return;
+        }
+        clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.log_title), number));
+        Toast.makeText(this, R.string.copy_number_done, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setFilter(int value) {        if (filter == value) {
             return;
         }
         filter = value;
@@ -140,7 +171,8 @@ public final class LogActivity extends Activity {
         }
 
         adapter.notifyDataSetChanged();
-        summaryView.setText(getString(R.string.log_summary, total));
+        summaryView.setText(getString(R.string.log_summary, total) + " · "
+                + getString(R.string.log_copy_hint));
 
         boolean isEmpty = rows.isEmpty();
         list.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
@@ -236,11 +268,6 @@ public final class LogActivity extends Activity {
         @Override
         public int getItemViewType(int position) {
             return rows.get(position) instanceof String ? 0 : 1;
-        }
-
-        @Override
-        public boolean isEnabled(int position) {
-            return false;
         }
 
         @Override

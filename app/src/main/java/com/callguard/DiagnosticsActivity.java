@@ -1,6 +1,5 @@
 package com.callguard;
 
-import android.app.Activity;
 import android.app.role.RoleManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -20,7 +19,7 @@ import java.util.Locale;
  * Answers the only two questions that matter when something does not work:
  * does the system call us at all, and what do we decide for a given number.
  */
-public final class DiagnosticsActivity extends Activity {
+public final class DiagnosticsActivity extends LocalizedActivity {
 
     private TextView stateView;
     private TextView checkResultView;

@@ -126,7 +126,7 @@
         <a class="btn primary si-btn" href="https://boosty.to/garneva13">Boosty</a>
       </aside>
     </div>
-    <img class="shot" src="../variant-a-control.png" alt="CallGuard main screen">
+    <img class="shot" src="../home.png" alt="CallGuard main screen">
   </header>
 
   <figure class="promo">
@@ -151,11 +151,19 @@
     </div>
     <div class="card">
       <h3>Keeps a journal</h3>
-      <p>Number, time and the reason for every decision: “not in contacts”, “number in contacts”, “scheduled pause”.</p>
+      <p>Number, time and the reason for every decision. Long-press a row to copy the number and look it up.</p>
     </div>
     <div class="card">
       <h3>Flexible pauses</h3>
-      <p>An hour for a courier, a weekday schedule from 9 to 18, or a one-time pass for the next call.</p>
+      <p>30 minutes, one, two or three hours — your choice. Plus a weekday schedule and a pass for the next unknown call.</p>
+    </div>
+    <div class="card">
+      <h3>Statistics</h3>
+      <p>Blocked calls per day, week, month or year: a chart by day, comparison with the previous period and the hours when calls come most often.</p>
+    </div>
+    <div class="card">
+      <h3>You can see it working</h3>
+      <p>A silent ongoing notification: “Filter is on”, paused, or scheduled. It comes back after a reboot.</p>
     </div>
     <div class="card">
       <h3>Allow list</h3>
@@ -164,6 +172,10 @@
     <div class="card">
       <h3>Works in any country</h3>
       <p>The country comes from the SIM or the network and numbers are compared in international format — a contact from Berlin will not be blocked.</p>
+    </div>
+    <div class="card">
+      <h3>English and Russian</h3>
+      <p>The interface language is switched inside the app: About → Language. System language by default.</p>
     </div>
   </div>
 
@@ -228,6 +240,16 @@
     <summary>Numbers are compared by the last 10 digits</summary>
     <p>So <code>+7 916 123-45-67</code>, <code>8 (916) 123-45-67</code> and <code>9161234567</code> are treated as
     one number. Otherwise different formatting would break matching.</p>
+  </details>
+  <details>
+    <summary>Statistics are computed from the journal</summary>
+    <p>There is no separate database: the app counts blocks from the journal, which keeps the latest 1000 entries.
+    On a normal phone that is months of history, but very old calls are eventually pushed out.</p>
+  </details>
+  <details>
+    <summary>The status notification needs notification permission</summary>
+    <p>The app asks once on Android 13 and newer. If you decline, the notification will not appear — the filter
+    itself keeps working.</p>
   </details>
 
   <footer>

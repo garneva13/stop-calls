@@ -21,7 +21,7 @@ Android 10 и новее (minSdk 29), APK ~275 КБ, лицензия MIT.
 
 | Главный экран | Журнал |
 |---|---|
-| ![Главный экран](docs/variant-a-control.png) | ![Журнал](docs/variant-journal.png) |
+| ![Главный экран](docs/home.png) | ![Журнал](docs/variant-journal.png) |
 | **Диагностика** | **Пауза по расписанию** |
 | ![Диагностика](docs/mockup-diagnostics.png) | ![Расписание](docs/mockup-schedule.png) |
 

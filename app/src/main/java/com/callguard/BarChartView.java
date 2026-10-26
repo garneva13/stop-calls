@@ -78,7 +78,6 @@ public final class BarChartView extends View {
 
         float slot = (right - left) / count;
         float barWidth = Math.min(dp(26), slot * 0.56f);
-        int labelEvery = Math.max(1, (int) Math.ceil(count / 6.0));
 
         for (int index = 0; index < count; index++) {
             float center = left + slot * index + slot / 2f;
@@ -96,8 +95,8 @@ public final class BarChartView extends View {
                         bottom - height - dp(5), textPaint);
             }
 
-            if (labels.length > index && labels[index] != null
-                    && (index % labelEvery == 0 || index == count - 1)) {
+            // The caller decides which labels to show; null means "skip".
+            if (labels.length > index && labels[index] != null) {
                 textPaint.setTextSize(dp(9));
                 textPaint.setTextAlign(Paint.Align.CENTER);
                 drawLabel(canvas, labels[index], center, bottom + dp(12));

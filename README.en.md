@@ -59,7 +59,7 @@ No Gradle and no network are required: JDK 17 and Android SDK build-tools.
 
 ```powershell
 cd callguard
-.\build-apk.ps1 -Clean -Version 1.11 -VersionCode 12
+.\build-apk.ps1 -Clean -Version 1.12 -VersionCode 13
 ```
 
 The signed APK is copied to `dist/`. Self-tests for the pure logic:

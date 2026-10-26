@@ -285,7 +285,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-apk.ps1 -Clean
 6. `zipalign`, `apksigner` (v2 + v3), проверка подписи;
 7. результат копируется в `dist/CallGuard-<версия>.apk`.
 
-Параметры: `-Version 1.9 -VersionCode 10` для новой версии, `-MinSdk`, `-TargetSdk`.
+Параметры: `-Version 1.12 -VersionCode 13` для новой версии, `-MinSdk`, `-TargetSdk`.
 
 ### Самотесты логики
 

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Стоп-звонки — политика конфиденциальности / Privacy policy</title>
+<style>
+  :root{--bg:#f2f3f5;--card:#fff;--stroke:#e4e7eb;--text:#14181d;--muted:#5f6b76;--accent:#0b57d0}
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#0f1216;--card:#1a1e23;--stroke:#2a3036;--text:#e7eaee;--muted:#9aa5b1;--accent:#a8c7fa}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+  .wrap{max-width:760px;margin:0 auto;padding:36px 20px 64px}
+  h1{font-size:28px;margin:0 0 6px}
+  h2{font-size:20px;margin:34px 0 10px}
+  .lead{color:var(--muted);margin:0 0 8px}
+  .card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:18px 20px;margin:18px 0}
+  ul{padding-left:20px;margin:10px 0}
+  li{margin-bottom:6px}
+  code{background:var(--card);border:1px solid var(--stroke);border-radius:6px;padding:1px 6px;font-size:14px}
+  a{color:var(--accent)}
+  .lang{font-size:13px;font-weight:700;margin-top:8px;display:inline-block}
+  footer{border-top:1px solid var(--stroke);padding-top:14px;color:var(--muted);font-size:13px;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Политика конфиденциальности</h1>
+  <p class="lead">Приложение «Стоп-звонки» (CallGuard) для Android. Обновлено 26 октября 2026.</p>
+  <a class="lang" href="#english">English version ↓</a>
+
+  <div class="card">
+    <strong>Коротко.</strong> Приложение работает целиком на телефоне. Оно не собирает, не хранит
+    на серверах и не передаёт третьим лицам ни номера звонков, ни контакты, ни журнал. Единственный
+    сетевой запрос — проверка обновлений на GitHub.
+  </div>
+
+  <h2>Какие данные обрабатываются</h2>
+  <ul>
+    <li><b>Контакты.</b> Приложение читает имена и номера из адресной книги, чтобы понять, есть ли
+      звонящий в контактах. Список номеров хранится только в памяти процесса и обновляется раз в 5 минут.
+      Он не записывается в файлы, не передаётся и не загружается в сеть.</li>
+    <li><b>Номер входящего звонка.</b> Передаётся приложению системой через
+      <code>CallScreeningService</code> и сохраняется в журнал только на устройстве.</li>
+    <li><b>Журнал и настройки.</b> Хранятся в локальной базе SQLite и SharedPreferences на телефоне.
+      Пользователь может очистить журнал в приложении или удалить все данные, удалив приложение.</li>
+    <li><b>Статистика.</b> Считается локально из журнала, отдельной базы нет.</li>
+  </ul>
+
+  <h2>Разрешения и зачем они</h2>
+  <ul>
+    <li><code>READ_CONTACTS</code> — сверка номера звонящего с адресной книгой.</li>
+    <li><code>POST_NOTIFICATIONS</code> — тихий индикатор «Фильтр включён» в шторке.</li>
+    <li><code>INTERNET</code> — только проверка обновлений и скачивание APK.</li>
+    <li><code>REQUEST_INSTALL_PACKAGES</code> — установка собственного обновления.</li>
+    <li><code>RECEIVE_BOOT_COMPLETED</code> — возврат индикатора после перезагрузки телефона.</li>
+  </ul>
+
+  <h2>Сеть</h2>
+  <p>Единственный запрос — <code>GET https://api.github.com/repos/garneva13/stop-calls/releases/latest</code>
+  и, если доступно обновление, скачивание APK с <code>github.com</code>. В запросе нет номеров,
+  контактов, журнала или идентификаторов устройства. Аналитики, рекламы и трекеров в приложении нет.</p>
+
+  <h2>Передача данных третьим лицам</h2>
+  <p>Нет. Приложение не продаёт и не передаёт данные. Обращения к GitHub — загрузка публичной
+  информации о релизах, к которой GitHub применяет
+  <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">свою политику</a>.</p>
+
+  <h2>Дети</h2>
+  <p>Приложение не предназначено для детей и не собирает данные о них.</p>
+
+  <h2>Изменения</h2>
+  <p>Если политика изменится, новая версия будет опубликована на этой странице с датой обновления.</p>
+
+  <h2>Контакты</h2>
+  <p>Вопросы и сообщения об ошибках:
+  <a href="https://github.com/garneva13/stop-calls/issues">github.com/garneva13/stop-calls/issues</a>.</p>
+
+  <hr style="border:none;border-top:1px solid var(--stroke);margin:44px 0 0">
+
+  <h1 id="english" style="margin-top:36px">Privacy policy</h1>
+  <p class="lead">CallGuard for Android. Last updated: 26 October 2026.</p>
+
+  <div class="card">
+    <strong>In short.</strong> The app runs entirely on the phone. It does not collect, store on servers
+    or share phone numbers, contacts or the journal with anyone. The only network request is the update
+    check against GitHub.
+  </div>
+
+  <h2>What is processed</h2>
+  <ul>
+    <li><b>Contacts.</b> Read to check whether the caller is in your address book. The index stays in
+      memory, is refreshed every 5 minutes, is never written to disk and never leaves the device.</li>
+    <li><b>Incoming number.</b> Delivered by Android through <code>CallScreeningService</code> and stored
+      in the on-device journal.</li>
+    <li><b>Journal and settings.</b> Stored locally in SQLite and SharedPreferences. You can clear the
+      journal in the app or remove everything by uninstalling it.</li>
+    <li><b>Statistics.</b> Computed locally from the journal; there is no separate database.</li>
+  </ul>
+
+  <h2>Permissions</h2>
+  <ul>
+    <li><code>READ_CONTACTS</code> — compare the caller with the address book.</li>
+    <li><code>POST_NOTIFICATIONS</code> — the silent “Filter is on” status notification.</li>
+    <li><code>INTERNET</code> — update check and APK download only.</li>
+    <li><code>REQUEST_INSTALL_PACKAGES</code> — install the app's own update.</li>
+    <li><code>RECEIVE_BOOT_COMPLETED</code> — restore the indicator after a reboot.</li>
+  </ul>
+
+  <h2>Network</h2>
+  <p>One request: <code>GET https://api.github.com/repos/garneva13/stop-calls/releases/latest</code>,
+  plus the APK download from <code>github.com</code> when an update exists. No numbers, contacts,
+  journal entries or device identifiers are sent. There are no ads, analytics or trackers.</p>
+
+  <h2>Third parties</h2>
+  <p>None. Data is not sold or shared. GitHub requests fetch public release metadata and fall under
+  <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.</p>
+
+  <h2>Children</h2>
+  <p>The app is not directed to children and collects no data about them.</p>
+
+  <h2>Contact</h2>
+  <p><a href="https://github.com/garneva13/stop-calls/issues">github.com/garneva13/stop-calls/issues</a></p>
+
+  <footer>
+    «Стоп-звонки» / CallGuard · MIT · <a href="https://garneva13.github.io/stop-calls/">страница проекта</a>
+  </footer>
+</div>
+</body>
+</html>

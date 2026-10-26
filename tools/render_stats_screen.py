@@ -125,6 +125,7 @@ def main():
     draw.text((left + pad, y + pad + dp(24)), "Когда чаще всего звонят", font=font(11),
               fill=SECOND, anchor="la")
     hour_labels = [f"{hour:02d}:00" if hour % 6 == 0 else None for hour in range(24)]
+    hour_labels[23] = "24:00"
     chart(draw, left + pad, y + dp(64), inner, dp(150), HOURS, hour_labels, False)
 
     img.save(os.path.join(OUT, "stats-screen.png"), optimize=True)

@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 W, H = 1200, 630
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs")
-PHONE = os.path.join(OUT, "variant-a-control.png")
+PHONE = os.path.join(OUT, "home.png")
 BOLD = r"C:\Windows\Fonts\segoeuib.ttf"
 SEMI = r"C:\Windows\Fonts\seguisb.ttf"
 REG = r"C:\Windows\Fonts\segoeui.ttf"
@@ -100,7 +100,7 @@ def render(height, path):
     # --- text block ------------------------------------------------------
     left = 72
 
-    badge = "Бесплатно · Android 11+ · открытый код"
+    badge = "Бесплатно · Android 10+ · открытый код"
     pill(draw, left, 92 + dy, badge, 20, ACCENT, ACCENT_SOFT, (32, 72, 116))
 
     title_font = font(BOLD, 78)
@@ -112,7 +112,7 @@ def render(height, path):
 
     chip_font = font(SEMI, 19)
     x = left
-    for label in ("до первого гудка", "журнал", "белый список"):
+    for label in ("до первого гудка", "журнал и статистика", "белый список"):
         width = int(draw.textlength(label, font=chip_font)) + 44
         draw.rounded_rectangle([x, 396 + dy, x + width, 436 + dy], radius=20,
                                fill=(24, 31, 42), outline=(48, 58, 72), width=1)
@@ -123,7 +123,7 @@ def render(height, path):
 
     url_font = font(REG, 22)
     draw.text((left, 492 + dy), "github.com/garneva13/stop-calls", font=url_font, fill=DIM)
-    draw.text((left, 524 + dy), "без рекламы · без подписок · 90 КБ", font=url_font, fill=DIM)
+    draw.text((left, 524 + dy), "без рекламы · без подписок · 275 КБ", font=url_font, fill=DIM)
 
     base.convert("RGB").save(path, optimize=True)
     print(path)

@@ -9,7 +9,7 @@ contacts, and keeps a journal of those calls.
 · **Website:** [garneva13.github.io/stop-calls](https://garneva13.github.io/stop-calls/en/)
 · **Русская версия:** [README.md](README.md)
 
-Android 10 and newer (minSdk 29), APK ~126 KB, MIT license.
+Android 10 and newer (minSdk 29), APK ~275 KB, MIT license.
 
 > [!TIP]
 > **The app is free: no ads, no subscriptions, no paid tiers.** One person builds it in
@@ -22,9 +22,13 @@ Android 10 and newer (minSdk 29), APK ~126 KB, MIT license.
 |---|---|
 | Rejects calls from numbers not in contacts, before the first ring | switch in the state block |
 | Journal of every screened call with the reason | “Full journal” |
-| One-hour pause and a weekly schedule | “Pause 1 h”, “Schedule” |
-| One-time pass for the next unknown call | “Let through” |
+| Pause for 30 minutes, 1, 2 or 3 hours | “Pause” tile |
+| Weekly schedule | “Schedule” tile |
+| Let the next unknown call through | “Let next call through” tile |
 | Allow list of numbers that always get through | “Allow list” |
+| Statistics: day, week, month, year — chart and call times | “Statistics” row |
+| Status notification in the shade: on / paused | appears automatically |
+| English and Russian UI with an in-app switch | About → Language |
 | Diagnostics: do calls reach the app, what was decided | “Diagnostics” |
 
 The app works offline: the only network call is the update check against

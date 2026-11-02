@@ -247,24 +247,19 @@ GET https://api.github.com/repos/garneva13/stop-calls/releases
 → [].assets[].download_count
 ```
 
-### GoatCounter (бесплатно, без cookies)
+### GoatCounter — подключён
 
-1. Зарегистрироваться на goatcounter.com, создать сайт `garneva13.github.io/stop-calls`.
-2. В `<head>` обеих страниц добавить:
+Счётчик стоит на обеих страницах: `garneva13.goatcounter.com`. События:
 
-```html
-<script data-goatcounter="https://ВАШ_КОД.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-```
+| Событие | Где срабатывает |
+|---|---|
+| `download-apk` | кнопки «Скачать APK» (шапка и центр) |
+| `support-boosty` | все ссылки на Boosty |
+| `source-github` | ссылки на исходный код |
 
-3. На кнопки «Скачать APK» добавить атрибут:
-
-```html
-data-goatcounter-click="download-apk"
-```
-
-События видно в разделе «Paths»: `download-apk` покажет, сколько людей нажали кнопку,
-а не просто зашли.
+Смотреть: GoatCounter → выбранный сайт → **Paths**. Обычные визиты идут отдельными путями
+(`/`, `/en/`), события — по именам выше. Ограничение: блокировщики рекламы режут
+`gc.zgo.at`, поэтому реальных людей чуть больше, чем показывает счётчик.
 
 ### Чего не делать
 

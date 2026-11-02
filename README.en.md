@@ -32,8 +32,9 @@ Android 10 and newer (minSdk 29), APK ~275 KB, MIT license.
 | English and Russian UI with an in-app switch | About → Language |
 | Diagnostics: do calls reach the app, what was decided | “Diagnostics” |
 
-The app works offline: the only network call is the update check against
-`api.github.com`. The journal, allow list and settings stay on the phone.
+The app does **not use the internet**: the APK has no `INTERNET` permission. No update
+checks, no analytics, no ads. The journal, allow list and settings stay on the phone;
+contacts are read only to compare the caller number and never leave the device.
 
 ## Requirements
 
@@ -75,15 +76,18 @@ $jdk = 'C:\Program Files (x86)\Android\openjdk\jdk-17.0.14\bin'
 ## Releasing
 
 ```powershell
-.\build-apk.ps1 -Version 1.12 -VersionCode 13
+.\build-apk.ps1 -Version 1.13 -VersionCode 14
 git push
 ```
 
-Then create a GitHub release with tag `v1.12` and attach
-`dist/CallGuard-1.12.apk`. The app reads `releases/latest` and offers the update.
+Then create a GitHub release with tag `v1.13` and attach `dist/CallGuard-1.13.apk`.
 
-Never commit `keystore/` — anyone with the signing key could publish an update
-your phone would accept.
+There is no in-app updater: the app has no network permission. Users download the new
+APK and install it over the old one; data is kept as long as the signing key is the same.
+In RuStore the version is updated through the store console.
+
+Never commit `keystore/` — anyone with the signing key could sign an update your phone
+would accept. Changing the key means users must uninstall first.
 
 ## License
 

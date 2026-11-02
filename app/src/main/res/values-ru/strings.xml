@@ -212,12 +212,14 @@
     <string name="about_not_configured">Обновления не настроены: укажите репозиторий в строке update_repo</string>
     <string name="about_install_file">Установить из файла</string>
     <string name="about_install_file_hint">Если вы скачали APK вручную — выберите его здесь, и Android поставит обновление поверх. Журнал и настройки сохранятся.</string>
-    <string name="about_privacy">Сеть используется только для проверки обновлений на GitHub: один запрос к api.github.com и загрузка APK оттуда. Никакие данные о звонках, контактах или журнале никуда не отправляются — у приложения нет и не будет такой логики.\n\nЖурнал, белый список и настройки хранятся только на телефоне.</string>
+    <string name="about_privacy">Приложение не использует интернет: ни проверки обновлений, ни аналитики, ни рекламы. Журнал, белый список и настройки хранятся только на телефоне.
+
+Контакты читаются только для сверки номера и не покидают устройство.</string>
     <string name="about_network_note">Проверка обновлений — единственное сетевое действие. Его можно не использовать: обновляйтесь файлом.</string>
     <string name="about_project">Страница проекта</string>
     <string name="about_support">Поддержать автора</string>
     <string name="about_support_title">Поддержать</string>
-    <string name="about_privacy_title">Приватность и сеть</string>
+    <string name="about_privacy_title">Приватность</string>
     <string name="action_update_install">Установить</string>
     <string name="toast_no_browser">Не нашлось приложения, чтобы открыть ссылку</string>
     <string name="install_success">Обновление установлено</string>

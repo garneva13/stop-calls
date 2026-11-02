@@ -282,8 +282,7 @@ public final class MainActivity extends LocalizedActivity {
 
         int allowedNumbers = db.whitelistCount();
         textWhitelistCount.setText(getString(R.string.more_whitelist_count, allowedNumbers));
-        textAboutVersion.setText(getString(R.string.about_version,
-                UpdateManager.currentVersion(this)));
+        textAboutVersion.setText(getString(R.string.about_version, appVersion()));
 
         boolean paused = settings.isPaused();
         tilePause.setBackgroundResource(paused ? R.drawable.bg_tile_warn : R.drawable.bg_tile);
@@ -314,6 +313,16 @@ public final class MainActivity extends LocalizedActivity {
 
         Indicator.update(this);
         FilterTileService.requestRefresh(this);
+    }
+
+    private String appVersion() {
+        try {
+            String version = getPackageManager()
+                    .getPackageInfo(getPackageName(), 0).versionName;
+            return version == null ? "" : version;
+        } catch (PackageManager.NameNotFoundException error) {
+            return "";
+        }
     }
 
     /** The status indicator needs POST_NOTIFICATIONS on Android 13+, ask once. */

@@ -213,12 +213,14 @@
     <string name="about_not_configured">Updates are not configured: set the repository in update_repo</string>
     <string name="about_install_file">Install from file</string>
     <string name="about_install_file_hint">If you downloaded the APK manually, pick it here and Android will install the update over the current version. The journal and settings are kept.</string>
-    <string name="about_privacy">The network is used for one thing only: checking updates on GitHub — one request to api.github.com and the APK download from there. No data about calls, contacts or the journal is ever sent; the app has no such logic.\n\nThe journal, allow list and settings stay on your phone.</string>
+    <string name="about_privacy">The app does not use the internet: no update checks, no analytics, no ads. The journal, allow list and settings stay on the phone.
+
+Contacts are read only to compare the caller number and never leave the device.</string>
     <string name="about_network_note">The update check is the only network action. You can skip it and update from a file.</string>
     <string name="about_project">Project page</string>
     <string name="about_support">Support the author</string>
     <string name="about_support_title">Support</string>
-    <string name="about_privacy_title">Privacy and network</string>
+    <string name="about_privacy_title">Privacy</string>
     <string name="action_update_install">Install</string>
     <string name="toast_no_browser">No app found to open the link</string>
     <string name="install_success">Update installed</string>

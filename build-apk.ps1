@@ -185,7 +185,10 @@ $dexDir = Join-Path $build 'dex'
 $unsignedApk = Join-Path $build 'app-unsigned.apk'
 $alignedApk = Join-Path $build 'app-aligned.apk'
 $classesJar = Join-Path $build 'classes.jar'
-$keystore = Join-Path $root 'keystore\debug.keystore'
+$keystore = Join-Path $root 'keystore\release.keystore'
+$keystoreAlias = 'callguard'
+$passwordFile = Join-Path $root 'keystore\release.password'
+$storePassword = if (Test-Path $passwordFile) { (Get-Content $passwordFile -Raw).Trim() } else { 'android' }
 $signedApk = Join-Path $build "CallGuard-$Version.apk"
 $distApk = Join-Path $dist "CallGuard-$Version.apk"
 
@@ -258,7 +261,7 @@ Write-Step 'Aligning (zipalign)'
 Invoke-Tool $zipalign @('-f', '-p', '4', $unsignedApk, $alignedApk) 'zipalign'
 
 if (-not (Test-Path $keystore)) {
-    Write-Step 'Creating debug keystore'
+    Write-Step 'Creating release keystore'
     $keystoreDir = Split-Path -Parent $keystore
     if (-not (Test-Path $keystoreDir)) {
         New-Item -ItemType Directory -Path $keystoreDir | Out-Null
@@ -267,13 +270,13 @@ if (-not (Test-Path $keystore)) {
         '-genkeypair', '-v',
         '-keystore', $keystore,
         '-storetype', 'PKCS12',
-        '-storepass', 'android',
-        '-keypass', 'android',
-        '-alias', 'androiddebugkey',
+        '-storepass', $storePassword,
+        '-keypass', $storePassword,
+        '-alias', $keystoreAlias,
         '-keyalg', 'RSA',
         '-keysize', '2048',
-        '-validity', '10000',
-        '-dname', 'CN=CallGuard Debug,O=CallGuard,C=RU'
+        '-validity', '9125',
+        '-dname', 'CN=CallGuard,O=CallGuard,C=RU'
     ) 'keytool'
 }
 
@@ -281,9 +284,9 @@ Write-Step 'Signing (apksigner)'
 Invoke-Tool $java @(
     '-jar', $apksignerJar, 'sign',
     '--ks', $keystore,
-    '--ks-key-alias', 'androiddebugkey',
-    '--ks-pass', 'pass:android',
-    '--key-pass', 'pass:android',
+    '--ks-key-alias', $keystoreAlias,
+    '--ks-pass', "pass:$storePassword",
+    '--key-pass', "pass:$storePassword",
     '--min-sdk-version', "$MinSdk",
     '--v1-signing-enabled', 'false',
     '--v2-signing-enabled', 'true',

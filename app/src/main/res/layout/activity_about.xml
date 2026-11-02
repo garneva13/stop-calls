@@ -33,47 +33,6 @@
 
         <LinearLayout style="@style/Card">
 
-            <Button
-                android:id="@+id/buttonCheck"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/about_check" />
-
-            <TextView
-                android:id="@+id/textUpdateStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp" />
-
-            <Button
-                android:id="@+id/buttonBrowser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/about_download_browser" />
-
-            <TextView
-                style="@style/BodyText"
-                android:text="@string/about_browser_hint" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/Card">
-
-            <Button
-                android:id="@+id/buttonInstallFile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/about_install_file" />
-
-            <TextView
-                style="@style/BodyText"
-                android:text="@string/about_install_file_hint" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/Card">
-
             <TextView
                 style="@style/SectionTitle"
                 android:text="@string/language_title" />

@@ -187,6 +187,8 @@ $alignedApk = Join-Path $build 'app-aligned.apk'
 $classesJar = Join-Path $build 'classes.jar'
 $keystore = Join-Path $root 'keystore\release.keystore'
 $keystoreAlias = 'callguard'
+$oldKeystore = Join-Path $root 'keystore\debug.keystore'
+$lineageFile = Join-Path $root 'keystore\lineage.bin'
 $passwordFile = Join-Path $root 'keystore\release.password'
 $storePassword = if (Test-Path $passwordFile) { (Get-Content $passwordFile -Raw).Trim() } else { 'android' }
 $signedApk = Join-Path $build "CallGuard-$Version.apk"
@@ -281,19 +283,34 @@ if (-not (Test-Path $keystore)) {
 }
 
 Write-Step 'Signing (apksigner)'
-Invoke-Tool $java @(
+$signArgs = @(
     '-jar', $apksignerJar, 'sign',
     '--ks', $keystore,
     '--ks-key-alias', $keystoreAlias,
     '--ks-pass', "pass:$storePassword",
-    '--key-pass', "pass:$storePassword",
+    '--key-pass', "pass:$storePassword"
+)
+if (Test-Path $lineageFile) {
+    # Key rotation: devices signed with the old key can update in place.
+    $signArgs += @(
+        '--next-signer',
+        '--ks', $oldKeystore,
+        '--ks-key-alias', 'androiddebugkey',
+        '--ks-pass', 'pass:android',
+        '--key-pass', 'pass:android',
+        '--lineage', $lineageFile,
+        '--rotation-min-sdk-version', '28'
+    )
+}
+$signArgs += @(
     '--min-sdk-version', "$MinSdk",
     '--v1-signing-enabled', 'false',
     '--v2-signing-enabled', 'true',
     '--v3-signing-enabled', 'true',
     '--out', $signedApk,
     $alignedApk
-) 'apksigner sign'
+)
+Invoke-Tool $java $signArgs 'apksigner sign'
 
 Write-Step 'Verifying'
 Invoke-Tool $java @('-jar', $apksignerJar, 'verify', '--verbose', $signedApk) 'apksigner verify'

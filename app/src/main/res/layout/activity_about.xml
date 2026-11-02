@@ -85,6 +85,17 @@
                 android:layout_marginTop="10dp" />
         </LinearLayout>
 
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                style="@style/SectionTitle"
+                android:text="@string/about_tile_title" />
+
+            <TextView
+                style="@style/BodyText"
+                android:text="@string/about_tile_text" />
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/cardSupport"
             style="@style/Card"

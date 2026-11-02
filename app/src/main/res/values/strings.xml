@@ -274,6 +274,17 @@
     <string name="pause_2h">2 hours</string>
     <string name="pause_3h">3 hours</string>
 
+    <!-- Quick settings tile -->
+        <string name="about_tile_title">Quick Settings tile</string>
+    <string name="about_tile_text">Open the notification shade, tap the edit button and add \u201cCall filter\u201d. One tap turns the filter on or off without opening the app.</string>
+<string name="qs_label">Call filter</string>
+    <string name="qs_on">On</string>
+    <string name="qs_off">Off</string>
+    <string name="qs_role">Assign role</string>
+    <string name="qs_toast_on">Filter is on</string>
+    <string name="qs_toast_off">Filter is off</string>
+    <string name="qs_role_missing">Assign the call screening role in the app first</string>
+
     <!-- Status notification -->
     <string name="notification_channel">Filter status</string>
     <string name="notification_channel_desc">Shown while the call filter is active</string>

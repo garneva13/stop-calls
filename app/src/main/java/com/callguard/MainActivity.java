@@ -313,6 +313,7 @@ public final class MainActivity extends LocalizedActivity {
         bindRecent(db.blockedEvents(RECENT_COUNT));
 
         Indicator.update(this);
+        FilterTileService.requestRefresh(this);
     }
 
     /** The status indicator needs POST_NOTIFICATIONS on Android 13+, ask once. */

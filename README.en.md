@@ -28,6 +28,7 @@ Android 10 and newer (minSdk 29), APK ~275 KB, MIT license.
 | Allow list of numbers that always get through | “Allow list” |
 | Statistics: day, week, month, year — chart and call times | “Statistics” row |
 | Status notification in the shade: on / paused | appears automatically |
+| “Call filter” Quick Settings tile — toggle with one tap | shade → edit tiles |
 | English and Russian UI with an in-app switch | About → Language |
 | Diagnostics: do calls reach the app, what was decided | “Diagnostics” |
 

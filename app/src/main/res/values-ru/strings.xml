@@ -274,6 +274,17 @@
     <string name="pause_2h">2 часа</string>
     <string name="pause_3h">3 часа</string>
 
+    <!-- Quick settings tile -->
+        <string name="about_tile_title">Плитка в шторке</string>
+    <string name="about_tile_text">Опустите шторку, нажмите кнопку редактирования и добавьте «Фильтр звонков». Одно касание включает и выключает фильтр, не открывая приложение.</string>
+<string name="qs_label">Фильтр звонков</string>
+    <string name="qs_on">Включён</string>
+    <string name="qs_off">Выключен</string>
+    <string name="qs_role">Назначьте роль</string>
+    <string name="qs_toast_on">Фильтр включён</string>
+    <string name="qs_toast_off">Фильтр выключен</string>
+    <string name="qs_role_missing">Сначала назначьте роль фильтрации в приложении</string>
+
     <!-- Status notification -->
     <string name="notification_channel">Статус фильтра</string>
     <string name="notification_channel_desc">Показывается, пока фильтр звонков активен</string>

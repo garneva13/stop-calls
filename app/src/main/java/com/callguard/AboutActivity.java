@@ -19,6 +19,9 @@ public final class AboutActivity extends LocalizedActivity {
     private Button buttonSupport;
     private Button buttonProject;
     private Button buttonLanguage;
+    private Button buttonCheck;
+    private Button buttonDownload;
+    private TextView textUpdateStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,25 @@ public final class AboutActivity extends LocalizedActivity {
         cardSupport = findViewById(R.id.cardSupport);
         buttonSupport = findViewById(R.id.buttonSupport);
         buttonProject = findViewById(R.id.buttonProject);
+        buttonCheck = findViewById(R.id.buttonCheck);
+        buttonDownload = findViewById(R.id.buttonDownload);
+        textUpdateStatus = findViewById(R.id.textUpdateStatus);
 
         textVersion.setText(getString(R.string.about_version, currentVersion()));
+
+        buttonCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkForUpdates();
+            }
+        });
+        buttonDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Installation stays in the browser: no package-install permission in the app.
+                openUrl(getString(R.string.releases_url));
+            }
+        });
 
         bindSupport();
 
@@ -40,6 +60,32 @@ public final class AboutActivity extends LocalizedActivity {
             @Override
             public void onClick(View v) {
                 showLanguageDialog();
+            }
+        });
+    }
+
+    private void checkForUpdates() {
+        buttonCheck.setEnabled(false);
+        buttonDownload.setVisibility(View.GONE);
+        textUpdateStatus.setText(R.string.about_checking);
+
+        UpdateChecker.checkAsync(this, new UpdateChecker.Listener() {
+            @Override
+            public void onResult(UpdateChecker.Result result) {
+                buttonCheck.setEnabled(true);
+                switch (result.status) {
+                    case UpdateChecker.STATUS_AVAILABLE:
+                        textUpdateStatus.setText(getString(R.string.about_available, result.version));
+                        buttonDownload.setVisibility(View.VISIBLE);
+                        break;
+                    case UpdateChecker.STATUS_UP_TO_DATE:
+                        textUpdateStatus.setText(R.string.about_latest);
+                        break;
+                    default:
+                        textUpdateStatus.setText(getString(R.string.about_error,
+                                result.error == null ? "" : result.error));
+                        break;
+                }
             }
         });
     }

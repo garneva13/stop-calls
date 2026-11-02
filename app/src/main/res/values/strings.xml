@@ -197,7 +197,8 @@
 
     <!-- Distribution -->
     <string name="update_repo" translatable="false">garneva13/stop-calls</string>
-    <string name="project_url" translatable="false">https://github.com/garneva13/stop-calls</string>
+        <string name="releases_url" translatable="false">https://github.com/garneva13/stop-calls/releases/latest</string>
+<string name="project_url" translatable="false">https://github.com/garneva13/stop-calls</string>
     <string name="support_url" translatable="false">https://boosty.to/garneva13</string>
 
     <!-- About screen -->
@@ -216,11 +217,11 @@
     <string name="about_privacy">The app does not use the internet: no update checks, no analytics, no ads. The journal, allow list and settings stay on the phone.
 
 Contacts are read only to compare the caller number and never leave the device.</string>
-    <string name="about_network_note">The update check is the only network action. You can skip it and update from a file.</string>
+    <string name="about_network_note">The update check is the only network action. The request goes to api.github.com only; no call or contact data is sent.</string>
     <string name="about_project">Project page</string>
     <string name="about_support">Support the author</string>
     <string name="about_support_title">Support</string>
-    <string name="about_privacy_title">Privacy</string>
+    <string name="about_privacy_title">Privacy and network</string>
     <string name="action_update_install">Install</string>
     <string name="toast_no_browser">No app found to open the link</string>
     <string name="install_success">Update installed</string>
@@ -275,6 +276,8 @@ Contacts are read only to compare the caller number and never leave the device.<
     <string name="pause_1h">1 hour</string>
     <string name="pause_2h">2 hours</string>
     <string name="pause_3h">3 hours</string>
+
+    <string name="about_download">Download update</string>
 
     <!-- Quick settings tile -->
         <string name="about_tile_title">Quick Settings tile</string>

@@ -33,9 +33,9 @@
   <a class="lang" href="#english">English version ↓</a>
 
   <div class="card">
-    <strong>Коротко.</strong> Приложение работает целиком на телефоне и <b>не использует интернет</b>:
-    в APK нет разрешения <code>INTERNET</code>. Оно не собирает, не хранит на серверах и не передаёт
-    никому номера звонков, контакты и журнал.
+    <strong>Коротко.</strong> Приложение работает на телефоне. В сеть оно выходит только чтобы спросить
+    у GitHub номер последней версии. Оно не собирает, не хранит на серверах и не передаёт никому
+    номера звонков, контакты и журнал.
   </div>
 
   <h2>Какие данные обрабатываются</h2>
@@ -53,14 +53,16 @@
   <h2>Разрешения и зачем они</h2>
   <ul>
     <li><code>READ_CONTACTS</code> — сверка номера звонящего с адресной книгой.</li>
+    <li><code>INTERNET</code> — только проверка номера последней версии на GitHub.</li>
     <li><code>POST_NOTIFICATIONS</code> — тихий индикатор «Фильтр включён» в шторке.</li>
     <li><code>RECEIVE_BOOT_COMPLETED</code> — возврат индикатора после перезагрузки телефона.</li>
   </ul>
-  <p>Других разрешений нет: ни интернета, ни установки приложений, ни доступа к журналу вызовов.</p>
+  <p>Разрешения на установку приложений и на доступ к журналу вызовов не запрашиваются.</p>
 
   <h2>Сеть</h2>
-  <p>Приложение не выходит в сеть. Запросов к серверам нет — ни проверки обновлений, ни аналитики, ни рекламы.
-  Новые версии пользователь скачивает вручную со страницы проекта или из RuStore.</p>
+  <p>Единственный запрос — <code>GET https://api.github.com/repos/garneva13/stop-calls/releases/latest</code>:
+  приложение узнаёт номер последней версии. Никаких данных о звонках, контактах и журнале в запросе нет.
+  APK скачивается вручную из браузера: разрешения на установку пакетов у приложения нет.</p>
 
   <h2>Передача данных третьим лицам</h2>
   <p>Нет. Приложение не продаёт и не передаёт данные: у него нет для этого ни кода, ни сетевого разрешения.</p>
@@ -81,9 +83,9 @@
   <p class="lead">CallGuard for Android. Last updated: 2 November 2026.</p>
 
   <div class="card">
-    <strong>In short.</strong> The app runs entirely on the phone and <b>does not use the internet</b>:
-    the APK has no <code>INTERNET</code> permission. It does not collect, store on servers or share phone
-    numbers, contacts or the journal with anyone.
+    <strong>In short.</strong> The app runs on the phone. Its only network request asks GitHub for the latest
+    version number. It does not collect, store on servers or share phone numbers, contacts or the journal
+    with anyone.
   </div>
 
   <h2>What is processed</h2>
@@ -100,14 +102,16 @@
   <h2>Permissions</h2>
   <ul>
     <li><code>READ_CONTACTS</code> — compare the caller with the address book.</li>
+    <li><code>INTERNET</code> — check the latest version number on GitHub only.</li>
     <li><code>POST_NOTIFICATIONS</code> — the silent “Filter is on” status notification.</li>
     <li><code>RECEIVE_BOOT_COMPLETED</code> — restore the indicator after a reboot.</li>
   </ul>
-  <p>No other permissions: no internet, no package installation, no call log access.</p>
+  <p>No package installation and no call log access.</p>
 
   <h2>Network</h2>
-  <p>The app never goes online. There are no server requests — no update checks, no analytics, no ads.
-  New versions are downloaded manually from the project page or from RuStore.</p>
+  <p>One request: <code>GET https://api.github.com/repos/garneva13/stop-calls/releases/latest</code> to read
+  the latest version number. No call, contact or journal data is included. The APK is downloaded manually
+  from the browser; the app has no permission to install packages.</p>
 
   <h2>Third parties</h2>
   <p>None. The app does not sell or share data: it has neither the code nor the network permission for it.</p>

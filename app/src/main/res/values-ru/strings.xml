@@ -196,7 +196,8 @@
 
     <!-- Distribution -->
     <string name="update_repo" translatable="false">garneva13/stop-calls</string>
-    <string name="project_url" translatable="false">https://github.com/garneva13/stop-calls</string>
+        <string name="releases_url" translatable="false">https://github.com/garneva13/stop-calls/releases/latest</string>
+<string name="project_url" translatable="false">https://github.com/garneva13/stop-calls</string>
     <string name="support_url" translatable="false">https://boosty.to/garneva13</string>
 
     <!-- About screen -->
@@ -215,11 +216,11 @@
     <string name="about_privacy">Приложение не использует интернет: ни проверки обновлений, ни аналитики, ни рекламы. Журнал, белый список и настройки хранятся только на телефоне.
 
 Контакты читаются только для сверки номера и не покидают устройство.</string>
-    <string name="about_network_note">Проверка обновлений — единственное сетевое действие. Его можно не использовать: обновляйтесь файлом.</string>
+    <string name="about_network_note">Проверка обновлений — единственное сетевое действие. Запрос идёт только к api.github.com; данные о звонках и контактах не передаются.</string>
     <string name="about_project">Страница проекта</string>
     <string name="about_support">Поддержать автора</string>
     <string name="about_support_title">Поддержать</string>
-    <string name="about_privacy_title">Приватность</string>
+    <string name="about_privacy_title">Приватность и сеть</string>
     <string name="action_update_install">Установить</string>
     <string name="toast_no_browser">Не нашлось приложения, чтобы открыть ссылку</string>
     <string name="install_success">Обновление установлено</string>
@@ -275,6 +276,8 @@
     <string name="pause_1h">1 час</string>
     <string name="pause_2h">2 часа</string>
     <string name="pause_3h">3 часа</string>
+
+    <string name="about_download">Скачать обновление</string>
 
     <!-- Quick settings tile -->
         <string name="about_tile_title">Плитка в шторке</string>

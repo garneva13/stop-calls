@@ -229,11 +229,11 @@
   Google caller ID; you can switch back in the same “Caller ID &amp; spam app” setting.</p>
 
   <h2>Updates</h2>
-  <p>There is no in-app updater: the app has no internet permission. Download the new APK from this page and
-  install it over the current version — the journal, settings and allow list are kept, because the signing key
-  does not change.</p>
-  <p class="note">The app never goes online: no update checks, no analytics, no ads. The APK has no
-  <code>INTERNET</code> permission.</p>
+  <p>“Check for updates” in the About screen asks GitHub for the latest version number and tells you when a
+  newer one exists. Downloading is a separate button: the APK opens in the browser and installs over the
+  current version, keeping the journal and settings.</p>
+  <p class="note">The version check is the only network action: one request to <code>api.github.com</code>.
+  No call, contact or journal data is sent; the app never installs an APK by itself.</p>
   <p class="note">All versions and changes are listed
   <a href="https://github.com/garneva13/stop-calls/releases">in Releases</a>.</p>
 

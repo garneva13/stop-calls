@@ -223,17 +223,17 @@
   <ol class="steps">
     <li>Download the APK on your phone and open it. Allow installing from unknown sources for your file manager.</li>
     <li>In the app, grant contacts access and assign the “Call screening” role — pick <b>CallGuard</b> in the system dialog, not Phone.</li>
-    <li>Use “Check for updates” in the About screen, or just call yourself from an unknown number.</li>
+    <li>Call yourself from an unknown number — the call should be rejected and appear in the journal.</li>
   </ol>
   <p class="note">Only one app can hold the call screening role. Assigning it to CallGuard turns off the built-in
   Google caller ID; you can switch back in the same “Caller ID &amp; spam app” setting.</p>
 
   <h2>Updates</h2>
-  <p>The app checks the latest GitHub release, downloads the APK and hands it to the system installer.
-  Updates install over the current version — the journal and allow list are kept. If you prefer, download
-  the new APK manually and install it the same way.</p>
-  <p class="note">The update check is the only network action. The request goes to <code>api.github.com</code> only;
-  no call, contact or journal data is ever sent.</p>
+  <p>There is no in-app updater: the app has no internet permission. Download the new APK from this page and
+  install it over the current version — the journal, settings and allow list are kept, because the signing key
+  does not change.</p>
+  <p class="note">The app never goes online: no update checks, no analytics, no ads. The APK has no
+  <code>INTERNET</code> permission.</p>
   <p class="note">All versions and changes are listed
   <a href="https://github.com/garneva13/stop-calls/releases">in Releases</a>.</p>
 
@@ -241,7 +241,7 @@
   <div class="grid">
     <div class="card">
       <h3>Android 10 and newer</h3>
-      <p>Everything works: screening before the first ring, journal, schedule, in-app updates.</p>
+      <p>Everything works: screening before the first ring, journal, schedule, statistics, Quick Settings tile.</p>
     </div>
     <div class="card">
       <h3>Android 7–9 — no</h3>

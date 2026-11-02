@@ -29,13 +29,13 @@
 <div class="wrap">
 
   <h1>Политика конфиденциальности</h1>
-  <p class="lead">Приложение «Стоп-звонки» (CallGuard) для Android. Обновлено 26 октября 2026.</p>
+  <p class="lead">Приложение «Стоп-звонки» (CallGuard) для Android. Обновлено 2 ноября 2026.</p>
   <a class="lang" href="#english">English version ↓</a>
 
   <div class="card">
-    <strong>Коротко.</strong> Приложение работает целиком на телефоне. Оно не собирает, не хранит
-    на серверах и не передаёт третьим лицам ни номера звонков, ни контакты, ни журнал. Единственный
-    сетевой запрос — проверка обновлений на GitHub.
+    <strong>Коротко.</strong> Приложение работает целиком на телефоне и <b>не использует интернет</b>:
+    в APK нет разрешения <code>INTERNET</code>. Оно не собирает, не хранит на серверах и не передаёт
+    никому номера звонков, контакты и журнал.
   </div>
 
   <h2>Какие данные обрабатываются</h2>
@@ -54,20 +54,16 @@
   <ul>
     <li><code>READ_CONTACTS</code> — сверка номера звонящего с адресной книгой.</li>
     <li><code>POST_NOTIFICATIONS</code> — тихий индикатор «Фильтр включён» в шторке.</li>
-    <li><code>INTERNET</code> — только проверка обновлений и скачивание APK.</li>
-    <li><code>REQUEST_INSTALL_PACKAGES</code> — установка собственного обновления.</li>
     <li><code>RECEIVE_BOOT_COMPLETED</code> — возврат индикатора после перезагрузки телефона.</li>
   </ul>
+  <p>Других разрешений нет: ни интернета, ни установки приложений, ни доступа к журналу вызовов.</p>
 
   <h2>Сеть</h2>
-  <p>Единственный запрос — <code>GET https://api.github.com/repos/garneva13/stop-calls/releases/latest</code>
-  и, если доступно обновление, скачивание APK с <code>github.com</code>. В запросе нет номеров,
-  контактов, журнала или идентификаторов устройства. Аналитики, рекламы и трекеров в приложении нет.</p>
+  <p>Приложение не выходит в сеть. Запросов к серверам нет — ни проверки обновлений, ни аналитики, ни рекламы.
+  Новые версии пользователь скачивает вручную со страницы проекта или из RuStore.</p>
 
   <h2>Передача данных третьим лицам</h2>
-  <p>Нет. Приложение не продаёт и не передаёт данные. Обращения к GitHub — загрузка публичной
-  информации о релизах, к которой GitHub применяет
-  <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">свою политику</a>.</p>
+  <p>Нет. Приложение не продаёт и не передаёт данные: у него нет для этого ни кода, ни сетевого разрешения.</p>
 
   <h2>Дети</h2>
   <p>Приложение не предназначено для детей и не собирает данные о них.</p>
@@ -82,12 +78,12 @@
   <hr style="border:none;border-top:1px solid var(--stroke);margin:44px 0 0">
 
   <h1 id="english" style="margin-top:36px">Privacy policy</h1>
-  <p class="lead">CallGuard for Android. Last updated: 26 October 2026.</p>
+  <p class="lead">CallGuard for Android. Last updated: 2 November 2026.</p>
 
   <div class="card">
-    <strong>In short.</strong> The app runs entirely on the phone. It does not collect, store on servers
-    or share phone numbers, contacts or the journal with anyone. The only network request is the update
-    check against GitHub.
+    <strong>In short.</strong> The app runs entirely on the phone and <b>does not use the internet</b>:
+    the APK has no <code>INTERNET</code> permission. It does not collect, store on servers or share phone
+    numbers, contacts or the journal with anyone.
   </div>
 
   <h2>What is processed</h2>
@@ -105,19 +101,16 @@
   <ul>
     <li><code>READ_CONTACTS</code> — compare the caller with the address book.</li>
     <li><code>POST_NOTIFICATIONS</code> — the silent “Filter is on” status notification.</li>
-    <li><code>INTERNET</code> — update check and APK download only.</li>
-    <li><code>REQUEST_INSTALL_PACKAGES</code> — install the app's own update.</li>
     <li><code>RECEIVE_BOOT_COMPLETED</code> — restore the indicator after a reboot.</li>
   </ul>
+  <p>No other permissions: no internet, no package installation, no call log access.</p>
 
   <h2>Network</h2>
-  <p>One request: <code>GET https://api.github.com/repos/garneva13/stop-calls/releases/latest</code>,
-  plus the APK download from <code>github.com</code> when an update exists. No numbers, contacts,
-  journal entries or device identifiers are sent. There are no ads, analytics or trackers.</p>
+  <p>The app never goes online. There are no server requests — no update checks, no analytics, no ads.
+  New versions are downloaded manually from the project page or from RuStore.</p>
 
   <h2>Third parties</h2>
-  <p>None. Data is not sold or shared. GitHub requests fetch public release metadata and fall under
-  <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.</p>
+  <p>None. The app does not sell or share data: it has neither the code nor the network permission for it.</p>
 
   <h2>Children</h2>
   <p>The app is not directed to children and collects no data about them.</p>

@@ -10,3 +10,15 @@ __pycache__/
 
 # internal working notes
 BRIEF.md
+
+# generated previews (recreate with tools/render_*.py)
+docs/options-*.png
+docs/check-periods.png
+docs/tiles-preview.png
+docs/stats-preview.png
+docs/tile-preview.png
+docs/variant-a-control.png
+docs/variant-b-material.png
+docs/variant-c-settings.png
+docs/mockup-main.png
+docs/mockup-log.png

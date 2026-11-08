@@ -8,6 +8,7 @@ import android.os.Looper;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -16,12 +17,24 @@ import java.nio.charset.StandardCharsets;
 /**
  * Checks the latest GitHub release. It only reports whether a newer version
  * exists — downloading and installing stay the user's action in the browser.
+ *
+ * A failure is classified, because "no internet", "the proxy answered 502" and
+ * "the release is missing" need different words for the user: the first two are
+ * retried later, and in all cases the browser page stays the fallback.
  */
 public final class UpdateChecker {
 
     public static final int STATUS_AVAILABLE = 0;
     public static final int STATUS_UP_TO_DATE = 1;
     public static final int STATUS_ERROR = 2;
+
+    /** Why the check failed; only meaningful when status is STATUS_ERROR. */
+    public static final int KIND_NONE = 0;
+    public static final int KIND_NETWORK = 1;
+    public static final int KIND_SERVER = 2;
+    public static final int KIND_RATE_LIMIT = 3;
+    public static final int KIND_NOT_FOUND = 4;
+    public static final int KIND_OTHER = 5;
 
     private static final String API =
             "https://api.github.com/repos/garneva13/stop-calls/releases/latest";
@@ -33,13 +46,17 @@ public final class UpdateChecker {
 
     public static final class Result {
         public final int status;
+        public final int kind;
+        public final int httpCode;
         public final String version;
-        public final String error;
+        public final String detail;
 
-        private Result(int status, String version, String error) {
+        private Result(int status, int kind, int httpCode, String version, String detail) {
             this.status = status;
+            this.kind = kind;
+            this.httpCode = httpCode;
             this.version = version;
-            this.error = error;
+            this.detail = detail;
         }
     }
 
@@ -83,26 +100,47 @@ public final class UpdateChecker {
             connection.setRequestProperty("User-Agent", "CallGuard");
             int code = connection.getResponseCode();
             if (code != 200) {
-                return new Result(STATUS_ERROR, null, "HTTP " + code);
+                return failure(kindForCode(code), code, "HTTP " + code);
             }
             String body = read(connection);
             String tag = new JSONObject(body).optString("tag_name", "");
             String version = tag.replaceFirst("^[vV]", "").trim();
             if (version.isEmpty()) {
-                return new Result(STATUS_ERROR, null, "no tag_name");
+                return failure(KIND_OTHER, 200, "no tag_name");
             }
             String current = currentVersion(context);
             int comparison = compare(version, current);
-            return new Result(comparison > 0 ? STATUS_AVAILABLE : STATUS_UP_TO_DATE,
-                    version, null);
-        } catch (Exception error) {
-            String message = error.getMessage();
-            return new Result(STATUS_ERROR, null, message == null ? error.toString() : message);
+            int status = comparison > 0 ? STATUS_AVAILABLE : STATUS_UP_TO_DATE;
+            return new Result(status, KIND_NONE, 200, version, null);
+        } catch (IOException network) {
+            // No connection, DNS failure, timeout, or TLS reset by a proxy/DPI box.
+            String message = network.getMessage();
+            return failure(KIND_NETWORK, 0, message == null ? network.toString() : message);
+        } catch (Exception other) {
+            String message = other.getMessage();
+            return failure(KIND_OTHER, 0, message == null ? other.toString() : message);
         } finally {
             if (connection != null) {
                 connection.disconnect();
             }
         }
+    }
+
+    private static int kindForCode(int code) {
+        if (code == HttpURLConnection.HTTP_NOT_FOUND) {
+            return KIND_NOT_FOUND;
+        }
+        if (code == HttpURLConnection.HTTP_FORBIDDEN || code == 429) {
+            return KIND_RATE_LIMIT;
+        }
+        if (code >= 500) {
+            return KIND_SERVER;
+        }
+        return KIND_OTHER;
+    }
+
+    private static Result failure(int kind, int httpCode, String detail) {
+        return new Result(STATUS_ERROR, kind, httpCode, null, detail);
     }
 
     private static String read(HttpURLConnection connection) throws Exception {

@@ -212,7 +212,13 @@
     <string name="about_available">Доступна версия %1$s</string>
     <string name="about_downloading">Скачиваю обновление…</string>
     <string name="about_installing">Открываю системный установщик…</string>
-    <string name="about_error">Не удалось проверить обновление: %1$s</string>
+    <string name="about_error_network">Не удалось связаться с GitHub. Проверьте сеть — или скачайте APK со страницы проекта.</string>
+    <string name="about_error_server">GitHub временно недоступен (ошибка %1$d). Попробуйте позже или скачайте APK со страницы проекта.</string>
+    <string name="about_error_rate">GitHub ограничил частоту запросов. Попробуйте через минуту.</string>
+    <string name="about_error_not_found">Релиз на GitHub не найден.</string>
+    <string name="about_error_unknown">Не удалось проверить обновление. Проверьте сеть или откройте страницу релизов.</string>
+    <string name="about_error_other">Не удалось проверить обновление (HTTP %1$d).</string>
+    <string name="about_open_releases">Открыть страницу релизов</string>
     <string name="about_not_configured">Обновления не настроены: укажите репозиторий в строке update_repo</string>
     <string name="about_install_file">Установить из файла</string>
     <string name="about_install_file_hint">Если вы скачали APK вручную — выберите его здесь, и Android поставит обновление поверх. Журнал и настройки сохранятся.</string>

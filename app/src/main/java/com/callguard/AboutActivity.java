@@ -76,18 +76,40 @@ public final class AboutActivity extends LocalizedActivity {
                 switch (result.status) {
                     case UpdateChecker.STATUS_AVAILABLE:
                         textUpdateStatus.setText(getString(R.string.about_available, result.version));
+                        buttonDownload.setText(R.string.about_download);
                         buttonDownload.setVisibility(View.VISIBLE);
                         break;
                     case UpdateChecker.STATUS_UP_TO_DATE:
                         textUpdateStatus.setText(R.string.about_latest);
                         break;
                     default:
-                        textUpdateStatus.setText(getString(R.string.about_error,
-                                result.error == null ? "" : result.error));
+                        textUpdateStatus.setText(errorMessage(result));
+                        // The browser page is the fallback for every failure, so the
+                        // button stays available even when the API check did not work.
+                        buttonDownload.setText(R.string.about_open_releases);
+                        buttonDownload.setVisibility(View.VISIBLE);
                         break;
                 }
             }
         });
+    }
+
+    private String errorMessage(UpdateChecker.Result result) {
+        switch (result.kind) {
+            case UpdateChecker.KIND_NETWORK:
+                return getString(R.string.about_error_network);
+            case UpdateChecker.KIND_SERVER:
+                return getString(R.string.about_error_server, result.httpCode);
+            case UpdateChecker.KIND_RATE_LIMIT:
+                return getString(R.string.about_error_rate);
+            case UpdateChecker.KIND_NOT_FOUND:
+                return getString(R.string.about_error_not_found);
+            default:
+                if (result.httpCode >= 400) {
+                    return getString(R.string.about_error_other, result.httpCode);
+                }
+                return getString(R.string.about_error_unknown);
+        }
     }
 
     private String currentVersion() {

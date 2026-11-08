@@ -213,7 +213,13 @@
     <string name="about_available">Version %1$s is available</string>
     <string name="about_downloading">Downloading the update…</string>
     <string name="about_installing">Opening the system installer…</string>
-    <string name="about_error">Could not check for updates: %1$s</string>
+    <string name="about_error_network">Could not reach GitHub. Check the network — or download the APK from the project page.</string>
+    <string name="about_error_server">GitHub is temporarily unavailable (error %1$d). Try again later, or download the APK from the project page.</string>
+    <string name="about_error_rate">GitHub rate-limited the request. Try again in a minute.</string>
+    <string name="about_error_not_found">Release not found on GitHub.</string>
+    <string name="about_error_unknown">Could not check for updates. Check the network or open the releases page.</string>
+    <string name="about_error_other">Could not check for updates (HTTP %1$d).</string>
+    <string name="about_open_releases">Open the releases page</string>
     <string name="about_not_configured">Updates are not configured: set the repository in update_repo</string>
     <string name="about_install_file">Install from file</string>
     <string name="about_install_file_hint">If you downloaded the APK manually, pick it here and Android will install the update over the current version. The journal and settings are kept.</string>

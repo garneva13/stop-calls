@@ -86,6 +86,11 @@ public final class ContactIndex {
         }
     }
 
+    /** True when the app may read the address book at all. */
+    public static boolean hasAccess(Context context) {
+        return hasPermission(context);
+    }
+
     private static boolean hasPermission(Context context) {
         return context.checkSelfPermission(Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED;
@@ -93,47 +98,70 @@ public final class ContactIndex {
 
     private static void ensureLoadedLocked(Context context) {
         long now = System.currentTimeMillis();
+
+        // Checked before the TTL, not after: losing access has to take effect at once,
+        // not up to five minutes later. checkSelfPermission on the own package is a
+        // local lookup, so this costs nothing on the call path.
+        if (!hasPermission(context)) {
+            // No access to the address book: either it was never granted, or it was
+            // revoked — by the user or by the system, which resets the permissions of
+            // apps that have not been used for a while.
+            //
+            // This is NOT "the address book is empty": answering that would make the
+            // filter reject every caller, contacts included. It is the same situation
+            // as an unreadable provider, so the index reports itself unavailable and
+            // screening lets calls through. The previous snapshot is dropped as well:
+            // once access is withdrawn the app must not keep using contacts it read
+            // while it still had it.
+            exact = Collections.emptySet();
+            tails = Collections.emptySet();
+            names = Collections.emptyMap();
+            tailNames = Collections.emptyMap();
+            loadFailed = true;
+            loadedAt = now;
+            return;
+        }
+
         if (loadedAt != 0L && now - loadedAt < TTL_MS) {
             return;
         }
+
         Set<String> newExact = new HashSet<>();
         Set<String> newTails = new HashSet<>();
         Map<String, String> newNames = new HashMap<>();
         Map<String, String> newTailNames = new HashMap<>();
         boolean failed = false;
 
-        if (hasPermission(context)) {
-            Cursor cursor = null;
-            try {
-                cursor = context.getContentResolver().query(
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        new String[]{
-                                ContactsContract.CommonDataKinds.Phone.NUMBER,
-                                ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER,
-                                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
-                        },
-                        null, null, null);
-                if (cursor == null) {
-                    failed = true;
-                } else {
-                    while (cursor.moveToNext()) {
-                        String name = cursor.getString(2);
-                        if (name == null) {
-                            name = "";
-                        }
-                        add(context, newExact, newTails, newNames, newTailNames,
-                                cursor.getString(0), name);
-                        add(context, newExact, newTails, newNames, newTailNames,
-                                cursor.getString(1), name);
-                    }
-                }
-            } catch (RuntimeException ignored) {
-                // A locked or unavailable contacts provider must not break screening.
+        Cursor cursor = null;
+        try {
+            cursor = context.getContentResolver().query(
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    new String[]{
+                            ContactsContract.CommonDataKinds.Phone.NUMBER,
+                            ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER,
+                            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                    },
+                    null, null, null);
+            if (cursor == null) {
                 failed = true;
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
+            } else {
+                while (cursor.moveToNext()) {
+                    String name = cursor.getString(2);
+                    if (name == null) {
+                        name = "";
+                    }
+                    add(context, newExact, newTails, newNames, newTailNames,
+                            cursor.getString(0), name);
+                    add(context, newExact, newTails, newNames, newTailNames,
+                            cursor.getString(1), name);
                 }
+            }
+        } catch (RuntimeException ignored) {
+            // A locked or unavailable contacts provider must not break screening.
+            failed = true;
+        } finally {
+            if (cursor != null) {
+                cursor.close();
             }
         }
 

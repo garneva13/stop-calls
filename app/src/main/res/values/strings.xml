@@ -94,6 +94,7 @@
     <string name="diag_check_contacts">In contacts: yes — %1$s</string>
     <string name="diag_check_contacts_noname">In contacts: yes</string>
     <string name="diag_check_no_contacts">In contacts: no</string>
+    <string name="diag_check_contacts_unavailable">In contacts: not checked — no access to the address book</string>
     <string name="diag_check_whitelist">In allow list: yes</string>
     <string name="diag_check_no_whitelist">In allow list: no</string>
     <string name="diag_would_block">The filter would reject this call</string>
@@ -157,6 +158,8 @@
     <string name="hero_inactive_hint">Tap to pick CallGuard as the call screening app</string>
     <string name="hero_off_title">Filter is off</string>
     <string name="hero_off_hint">All incoming calls go through</string>
+    <string name="hero_no_contacts_title">Filter is not working</string>
+    <string name="hero_no_contacts_hint">No access to contacts — every call goes through</string>
     <string name="hero_on_title">Filter is on</string>
     <string name="hero_on_hint">Calls from unknown numbers are rejected</string>
     <string name="hero_paused_title">Paused</string>
@@ -286,6 +289,8 @@ Contacts are read only to compare the caller number and never leave the device.<
     <string name="qs_on">On</string>
     <string name="qs_off">Off</string>
     <string name="qs_role">Assign role</string>
+    <string name="qs_no_contacts">No access to contacts</string>
+    <string name="qs_no_contacts_missing">Grant access to contacts in the app — the filter cannot work without it</string>
     <string name="qs_toast_on">Filter is on</string>
     <string name="qs_toast_off">Filter is off</string>
     <string name="qs_role_missing">Assign the call screening role in the app first</string>
@@ -295,6 +300,8 @@ Contacts are read only to compare the caller number and never leave the device.<
     <string name="notification_channel_desc">Shown while the call filter is active</string>
     <string name="notification_title_on">Filter is on</string>
     <string name="notification_title_paused">Filter is paused</string>
+    <string name="notification_title_no_contacts">Filter is not working</string>
+    <string name="notification_text_no_contacts">No access to contacts — every call goes through</string>
     <string name="notification_text_on">Calls from unknown numbers are rejected</string>
     <string name="notification_text_blocked">Blocked today: %1$d</string>
     <string name="notification_text_paused">No blocking until %1$s</string>

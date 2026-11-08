@@ -361,6 +361,15 @@ public final class MainActivity extends LocalizedActivity {
             hintColor = R.color.hero_off_hint;
             title = getString(R.string.hero_off_title);
             hint = getString(R.string.hero_off_hint);
+        } else if (!ContactIndex.hasAccess(this)) {
+            // The switch says "on", but without the address book there is nothing to
+            // compare a caller against, so every call is let through. Saying so here is
+            // the difference between "the filter is working" and "the filter is a no-op".
+            background = R.color.hero_warn_bg;
+            titleColor = R.color.hero_warn_text;
+            hintColor = R.color.hero_warn_hint;
+            title = getString(R.string.hero_no_contacts_title);
+            hint = getString(R.string.hero_no_contacts_hint);
         } else if (settings.isPaused()) {
             background = R.color.hero_warn_bg;
             titleColor = R.color.hero_warn_text;
@@ -529,8 +538,7 @@ public final class MainActivity extends LocalizedActivity {
     // ------------------------------------------------------------ plumbing
 
     private boolean hasContactsPermission() {
-        return checkSelfPermission(Manifest.permission.READ_CONTACTS)
-                == PackageManager.PERMISSION_GRANTED;
+        return ContactIndex.hasAccess(this);
     }
 
     private boolean hasScreeningRole() {

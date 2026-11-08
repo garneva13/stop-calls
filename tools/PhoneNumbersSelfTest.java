@@ -17,6 +17,7 @@ public final class PhoneNumbersSelfTest {
 
     public static void main(String[] args) {
         canonicalCases();
+        shortNumberCases();
         matchCases();
         formatCases();
 
@@ -79,10 +80,52 @@ public final class PhoneNumbersSelfTest {
         expectFalse(PhoneNumbers.matches(null, exact, tails), "null number");
         expectFalse(PhoneNumbers.matches("79161234567", new HashSet<String>(),
                 new HashSet<String>()), "empty contacts");
-        expectTrue(PhoneNumbers.matches("79161234567", new HashSet<String>(),
-                new HashSet<>(Arrays.asList("9161234567"))), "tail match");
+        // A tail on its own is not enough: it only pre-filters, and the decision is
+        // taken on the full numbers, so a tail without a matching contact means no.
+        expectFalse(PhoneNumbers.matches("79161234567", new HashSet<String>(),
+                new HashSet<>(Arrays.asList("9161234567"))), "tail without a contact");
         expectFalse(PhoneNumbers.matches("79161234567", new HashSet<String>(),
                 new HashSet<>(Arrays.asList("9161234568"))), "tail differs");
+
+        section("same last ten digits is not enough (spoofed caller id)");
+        // The trunk-prefix spelling of the very same subscriber: same length, allowed.
+        expectTrue(PhoneNumbers.matches("89161234567", exact, tails), "8 instead of 7");
+        // Longer numbers that merely end with a contact's ten digits: a different
+        // subscriber in a different country, must not pass as a contact.
+        expectFalse(PhoneNumbers.matches("3809161234567", exact, tails), "ukrainian lookalike");
+        expectFalse(PhoneNumbers.matches("9989161234567", exact, tails), "uzbek lookalike");
+        expectFalse(PhoneNumbers.matches("999999999979161234567", exact, tails),
+                "padded lookalike");
+        expectFalse(PhoneNumbers.matches("19161234567", exact, tails),
+                "same length, different country, no such contact");
+
+        section("sameSubscriber");
+        expectTrue(PhoneNumbers.sameSubscriber("79161234567", "79161234567"), "identical");
+        expectTrue(PhoneNumbers.sameSubscriber("89161234567", "79161234567"), "trunk prefix");
+        expectFalse(PhoneNumbers.sameSubscriber("3809161234567", "79161234567"), "longer");
+        expectFalse(PhoneNumbers.sameSubscriber("79161234567", "3809161234567"), "shorter");
+        expectFalse(PhoneNumbers.sameSubscriber("9161234567", "9161234567".substring(0, 9)),
+                "different length short numbers");
+        expectTrue(PhoneNumbers.sameSubscriber("112", "112"), "short code, identical");
+        expectFalse(PhoneNumbers.sameSubscriber("112", "113"), "short code, different");
+        expectFalse(PhoneNumbers.sameSubscriber(null, "79161234567"), "null");
+    }
+
+    /**
+     * Short service codes (112, 102, 900) deliberately get a canonical form and are
+     * screened like any other number: spoofing them is a common fraud, so blocking
+     * an unknown one is the intended behaviour, and the whitelist is how a user lets
+     * a particular one through. These checks pin that down so a future change to the
+     * canonicalisation cannot alter the policy unnoticed.
+     */
+    private static void shortNumberCases() {
+        section("short service codes keep a canonical form (blocking policy)");
+        expect("112", PhoneNumbers.canonical("112"));
+        expect("102", PhoneNumbers.canonical("102"));
+        expect("900", PhoneNumbers.canonical("900"));
+        expect("112", PhoneNumbers.canonical("*112#"));
+        expect("112", PhoneNumbers.canonical("tel:112"));
+        expect(null, PhoneNumbers.canonical("12"));
     }
 
     private static void formatCases() {

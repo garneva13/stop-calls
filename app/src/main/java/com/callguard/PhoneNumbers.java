@@ -51,10 +51,68 @@ public final class PhoneNumbers {
     }
 
     /**
+     * True when two canonical numbers belong to the same subscriber: either they
+     * are identical, or they share the last ten digits and differ only in a
+     * prefix that is a known spelling of the same country code.
+     *
+     * The last ten digits alone are not enough. "3809161234567" is a different
+     * person in a different country whose number merely ends with the same ten
+     * digits as a contact, and so is "19161234567" — and a caller chooses the
+     * number they present. Requiring an equal length rules out the first, and
+     * requiring an equivalent prefix rules out the second; what is left through
+     * is "79161234567" versus "89161234567", which really is one subscriber
+     * written with and without the Russian trunk prefix.
+     *
+     * Numbers shorter than eleven digits — short service codes such as "112" or
+     * "900" — only ever match themselves: there is no country code to absorb, and
+     * two different short codes are two different destinations.
+     */
+    public static boolean sameSubscriber(String first, String second) {
+        if (first == null || second == null) {
+            return false;
+        }
+        if (first.equals(second)) {
+            return true;
+        }
+        if (first.length() != second.length() || first.length() < 11) {
+            return false;
+        }
+        if (!tail(first).equals(tail(second))) {
+            return false;
+        }
+        return equivalentPrefix(
+                first.substring(0, first.length() - 10),
+                second.substring(0, second.length() - 10));
+    }
+
+    /** True when two country-code prefixes are spellings of the same country. */
+    private static boolean equivalentPrefix(String first, String second) {
+        if (first.equals(second)) {
+            return true;
+        }
+        // A Russian number reaches the matcher as "7…" when it could be parsed as
+        // E.164 and as "8…" when the country of the call was unknown and the trunk
+        // prefix survived. Those two are the same subscriber; "1…" is not.
+        return isRussianPrefix(first) && isRussianPrefix(second);
+    }
+
+    private static boolean isRussianPrefix(String prefix) {
+        return DEFAULT_COUNTRY_CODE.equals(prefix) || "8".equals(prefix);
+    }
+
+    /**
      * Compares a canonical incoming number against a set of canonical contact
-     * numbers. Numbers of equal length and with the same last ten digits are
-     * treated as the same subscriber; this absorbs different country-code
-     * spellings and broken formatting.
+     * numbers, using {@link #sameSubscriber} as the rule.
+     *
+     * {@code tails} is only a fast negative filter: a tail nobody in the address
+     * book has cannot belong to a contact. A tail that is known still has to be
+     * confirmed against the full numbers, because a tail on its own says nothing
+     * about the length.
+     *
+     * This means the two arguments are not independent: every entry of
+     * {@code tails} has to be the tail of some entry of {@code exact}. A tail with
+     * no number behind it can never match, by design — before this method compared
+     * tails alone, and that was the hole it is now closing.
      */
     public static boolean matches(String canonical, Set<String> exact, Set<String> tails) {
         if (canonical == null || exact == null) {
@@ -63,8 +121,13 @@ public final class PhoneNumbers {
         if (exact.contains(canonical)) {
             return true;
         }
-        if (tails != null && canonical.length() >= 11) {
-            return tails.contains(tail(canonical));
+        if (tails == null || canonical.length() < 11 || !tails.contains(tail(canonical))) {
+            return false;
+        }
+        for (String known : exact) {
+            if (sameSubscriber(canonical, known)) {
+                return true;
+            }
         }
         return false;
     }

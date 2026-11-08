@@ -162,9 +162,22 @@ public final class CallGuardService extends CallScreeningService {
 
         static Decision block(String reason, String raw, String canonical,
                               int verification, long time) {
+            // setSkipCallLog and setSkipNotification are deliberately NOT set.
+            //
+            // Short service codes are screened like any other number, because that is
+            // exactly what gets spoofed: a caller presenting 112, 102 or 900 is far
+            // more likely to be a fraudster than the service itself. The cost of that
+            // choice is that a genuine call from such a number can be rejected, and
+            // the only thing that makes it recoverable is the rejected call staying in
+            // the system's missed-call list, where the user can see it and call back.
+            //
+            // Do not "clean up" the missed calls of blocked numbers: that safety net
+            // is the reason blocking short numbers is acceptable in the first place.
             CallResponse response = new CallResponse.Builder()
                     .setDisallowCall(true)
                     .setRejectCall(true)
+                    // Ignored by Telecom while the call is disallowed; kept for clarity
+                    // of intent — a blocked call must never make a sound.
                     .setSilenceCall(true)
                     .build();
             return new Decision(response, true, reason, raw, canonical, verification, time);

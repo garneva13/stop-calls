@@ -32,6 +32,14 @@ public final class FilterTileService extends TileService {
             openApp();
             return;
         }
+        if (!ContactIndex.hasAccess(this)) {
+            // Toggling would be meaningless: with no address book every call is let
+            // through whatever the switch says. Send the user where it can be fixed.
+            Toast.makeText(this, localized.getString(R.string.qs_no_contacts_missing),
+                    Toast.LENGTH_LONG).show();
+            openApp();
+            return;
+        }
         boolean enabled = !settings.isEnabled();
         settings.setEnabled(enabled);
         Indicator.update(this);
@@ -59,7 +67,10 @@ public final class FilterTileService extends TileService {
         Settings settings = Settings.get(this);
         Context localized = LocaleHelper.wrap(this);
         boolean hasRole = hasRole(this);
-        boolean enabled = settings.isEnabled() && hasRole;
+        boolean hasContacts = ContactIndex.hasAccess(this);
+        // Without the address book the filter cannot reject anything, so the tile must
+        // not show itself as active.
+        boolean enabled = settings.isEnabled() && hasRole && hasContacts;
         tile.setIcon(Icon.createWithResource(this, R.drawable.ic_tile_shield));
         tile.setLabel(localized.getString(R.string.qs_label));
         tile.setState(enabled ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -67,8 +78,10 @@ public final class FilterTileService extends TileService {
             int subtitle;
             if (!hasRole) {
                 subtitle = R.string.qs_role;
+            } else if (!hasContacts) {
+                subtitle = R.string.qs_no_contacts;
             } else {
-                subtitle = enabled ? R.string.qs_on : R.string.qs_off;
+                subtitle = settings.isEnabled() ? R.string.qs_on : R.string.qs_off;
             }
             tile.setSubtitle(localized.getString(subtitle));
         }

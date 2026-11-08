@@ -94,6 +94,7 @@
     <string name="diag_check_contacts">В контактах: да — %1$s</string>
     <string name="diag_check_contacts_noname">В контактах: да</string>
     <string name="diag_check_no_contacts">В контактах: нет</string>
+    <string name="diag_check_contacts_unavailable">В контактах: не проверено — нет доступа к адресной книге</string>
     <string name="diag_check_whitelist">В белом списке: да</string>
     <string name="diag_check_no_whitelist">В белом списке: нет</string>
     <string name="diag_would_block">Фильтр сбросил бы этот звонок</string>
@@ -157,6 +158,8 @@
     <string name="hero_inactive_hint">Нажмите, чтобы выбрать «Стоп-звонки» в роли фильтрации</string>
     <string name="hero_off_title">Фильтр выключен</string>
     <string name="hero_off_hint">Все входящие звонки проходят</string>
+    <string name="hero_no_contacts_title">Фильтр не работает</string>
+    <string name="hero_no_contacts_hint">Нет доступа к контактам — звонки проходят все</string>
     <string name="hero_on_title">Фильтр включён</string>
     <string name="hero_on_hint">Звонки не из контактов сбрасываются</string>
     <string name="hero_paused_title">Пауза</string>
@@ -286,6 +289,8 @@
     <string name="qs_on">Включён</string>
     <string name="qs_off">Выключен</string>
     <string name="qs_role">Назначьте роль</string>
+    <string name="qs_no_contacts">Нет доступа к контактам</string>
+    <string name="qs_no_contacts_missing">Выдайте доступ к контактам в приложении — без него фильтр не работает</string>
     <string name="qs_toast_on">Фильтр включён</string>
     <string name="qs_toast_off">Фильтр выключен</string>
     <string name="qs_role_missing">Сначала назначьте роль фильтрации в приложении</string>
@@ -295,6 +300,8 @@
     <string name="notification_channel_desc">Показывается, пока фильтр звонков активен</string>
     <string name="notification_title_on">Фильтр включён</string>
     <string name="notification_title_paused">Фильтр на паузе</string>
+    <string name="notification_title_no_contacts">Фильтр не работает</string>
+    <string name="notification_text_no_contacts">Нет доступа к контактам — звонки проходят все</string>
     <string name="notification_text_on">Звонки не из контактов сбрасываются</string>
     <string name="notification_text_blocked">Сегодня сброшено: %1$d</string>
     <string name="notification_text_paused">Звонки не блокируются до %1$s</string>

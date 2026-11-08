@@ -19,7 +19,8 @@ import java.util.List;
 public final class DbHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "callguard.db";
-    private static final int DB_VERSION = 2;
+    /** v2 replaced "blocked" with "events"; v3 added "whitelist.tail". */
+    private static final int DB_VERSION = 3;
 
     private static final String T_EVENTS = "events";
     private static final String T_WHITELIST = "whitelist";
@@ -46,7 +47,8 @@ public final class DbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + T_WHITELIST + " ("
                 + "canonical TEXT PRIMARY KEY,"
                 + "display TEXT NOT NULL,"
-                + "time INTEGER NOT NULL)");
+                + "time INTEGER NOT NULL,"
+                + "tail TEXT)");
     }
 
     @Override
@@ -67,6 +69,43 @@ public final class DbHelper extends SQLiteOpenHelper {
                 // Ignore: the old table may not exist at all.
             }
         }
+        if (oldVersion < 3) {
+            // The allow list used to be matched by exact string only, so a number the
+            // user had allowed stopped being allowed as soon as the same call arrived
+            // in a different spelling. Store the tail and fill it for existing rows.
+            // Two separate statements, each in its own try. The column may already
+            // exist — an install of the older build between two newer ones leaves it
+            // behind while taking the schema version back down — and in that case the
+            // ALTER throws. Sharing one try would skip the UPDATE with it and leave
+            // those rows with a NULL tail, silently unmatched for good.
+            try {
+                db.execSQL("ALTER TABLE " + T_WHITELIST + " ADD COLUMN tail TEXT");
+            } catch (RuntimeException ignored) {
+                // The column is already there; the UPDATE below still has to run.
+            }
+            try {
+                // Only the rows that still need it, so the migration can run twice.
+                db.execSQL("UPDATE " + T_WHITELIST
+                        + " SET tail = substr(canonical, length(canonical) - 9)"
+                        + " WHERE tail IS NULL AND length(canonical) > 10");
+            } catch (RuntimeException ignored) {
+                // Without the column there is nothing to fill.
+            }
+        }
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // An older APK installed over a newer one would otherwise make every call to
+        // getReadableDatabase() throw, which silently turns the filter into a no-op.
+        // The journal is expendable; the allow list is not, so it is kept as it is —
+        // an older build simply ignores the columns it does not know.
+        try {
+            db.execSQL("DROP TABLE IF EXISTS " + T_EVENTS);
+        } catch (RuntimeException ignored) {
+            // Nothing to drop.
+        }
+        createEvents(db);
     }
 
     private void createEvents(SQLiteDatabase db) {
@@ -173,6 +212,8 @@ public final class DbHelper extends SQLiteOpenHelper {
         values.put("canonical", canonical);
         values.put("display", display);
         values.put("time", System.currentTimeMillis());
+        values.put("tail", canonical != null && canonical.length() > 10
+                ? PhoneNumbers.tail(canonical) : null);
         getWritableDatabase().insertWithOnConflict(T_WHITELIST, null, values,
                 SQLiteDatabase.CONFLICT_REPLACE);
     }
@@ -181,17 +222,43 @@ public final class DbHelper extends SQLiteOpenHelper {
         getWritableDatabase().delete(T_WHITELIST, "canonical = ?", new String[]{canonical});
     }
 
+    /**
+     * True when the user has allowed this number.
+     *
+     * Matching follows the same rule as the address book
+     * ({@link PhoneNumbers#sameSubscriber}): a number the user allowed as
+     * "+7 916 …" stays allowed when the same call arrives as "8 916 …", while a
+     * longer spoofed number that merely shares the last ten digits does not.
+     */
     public boolean isWhitelisted(String canonical) {
         if (canonical == null) {
             return false;
         }
-        Cursor c = getReadableDatabase().query(T_WHITELIST, new String[]{"canonical"},
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor exact = db.query(T_WHITELIST, new String[]{"canonical"},
                 "canonical = ?", new String[]{canonical}, null, null, null, "1");
         try {
-            return c.moveToFirst();
+            if (exact.moveToFirst()) {
+                return true;
+            }
         } finally {
-            c.close();
+            exact.close();
         }
+        if (canonical.length() <= 10) {
+            return false;
+        }
+        Cursor byTail = db.query(T_WHITELIST, new String[]{"canonical"},
+                "tail = ?", new String[]{PhoneNumbers.tail(canonical)}, null, null, null);
+        try {
+            while (byTail.moveToNext()) {
+                if (PhoneNumbers.sameSubscriber(canonical, byTail.getString(0))) {
+                    return true;
+                }
+            }
+        } finally {
+            byTail.close();
+        }
+        return false;
     }
 
     public List<WhitelistEntry> whitelist() {

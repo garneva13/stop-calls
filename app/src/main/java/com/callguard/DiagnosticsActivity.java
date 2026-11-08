@@ -135,7 +135,11 @@ public final class DiagnosticsActivity extends LocalizedActivity {
         StringBuilder out = new StringBuilder();
         out.append(getString(R.string.diag_check_number, Numbers.format(this, canonical), canonical));
         out.append('\n');
-        if (match.name == null) {
+        if (!match.available) {
+            // The address book could not be read at all, which is not the same as
+            // "this number is not in it".
+            out.append(getString(R.string.diag_check_contacts_unavailable));
+        } else if (match.name == null) {
             out.append(getString(R.string.diag_check_no_contacts));
         } else if (match.name.isEmpty()) {
             out.append(getString(R.string.diag_check_contacts_noname));
@@ -147,15 +151,16 @@ public final class DiagnosticsActivity extends LocalizedActivity {
                 : R.string.diag_check_no_whitelist));
         out.append('\n');
 
+        // Mirrors CallGuardService.decide(): an unreadable index means the call is let
+        // through, so predicting a block here would contradict what the filter does.
         boolean wouldBlock = settings.isEnabled() && !settings.isPaused()
-                && !whitelisted && match.name == null;
+                && !whitelisted && match.available && match.name == null;
         out.append(getString(wouldBlock ? R.string.diag_would_block : R.string.diag_would_allow));
         checkResultView.setText(out.toString());
     }
 
     private boolean hasContactsPermission() {
-        return checkSelfPermission(android.Manifest.permission.READ_CONTACTS)
-                == android.content.pm.PackageManager.PERMISSION_GRANTED;
+        return ContactIndex.hasAccess(this);
     }
 
     private boolean hasRole() {

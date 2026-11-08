@@ -42,7 +42,12 @@ public final class Indicator {
 
         String title;
         String text;
-        if (settings.isPaused()) {
+        if (!ContactIndex.hasAccess(app)) {
+            // Without the address book the filter lets everything through; the indicator
+            // must not keep claiming that calls are being rejected.
+            title = app.getString(R.string.notification_title_no_contacts);
+            text = app.getString(R.string.notification_text_no_contacts);
+        } else if (settings.isPaused()) {
             title = app.getString(R.string.notification_title_paused);
             text = app.getString(R.string.notification_text_paused,
                     clock(settings.pausedUntil()));
